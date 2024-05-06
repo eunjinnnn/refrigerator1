@@ -1,5 +1,5 @@
 <script>
-    import { Card, Listgroup, Avatar } from 'flowbite-svelte';
+    import { Card, Listgroup, Avatar, Button } from 'flowbite-svelte';
 
     let categories = [
         {
@@ -45,7 +45,6 @@
 <Listgroup items={categories} let:item>
     <Card padding="xl" size="md">
         <div class="flex justify-between items-center mb-4">
-            <!-- <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Latest Customers</h5> -->
             <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
                 {item.name}
             </p>
@@ -64,7 +63,15 @@
             </div>
         </Listgroup>
     </Card>
-
 </Listgroup>
 
+
+<div class="flex flex-wrap gap-2">
+    <Button outline color="green">
+        <a href="/add">ADD</a>
+    </Button>
+    <Button outline color="red">
+        <a href="/delete">DELETE</a>
+    </Button>
+</div>
 

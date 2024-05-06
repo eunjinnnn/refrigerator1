@@ -12,7 +12,7 @@
   </NavBrand>
   <NavHamburger />
   <NavUl {activeUrl} {activeClass} {nonActiveClass}>
-    <NavLi href="/">Home</NavLi>
+    <NavLi href="/">HOME</NavLi>
     <NavLi href="/edit">EDIT</NavLi>
     <NavLi href="/my_refrigerator">MY REFRIGERATOR</NavLi>
     <NavLi href="/food_diary">FOOD DIARY</NavLi>

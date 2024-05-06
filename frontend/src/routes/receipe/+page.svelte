@@ -43,28 +43,22 @@
 </script>
 
 <Listgroup items={categories} let:item>
-    <Card padding="xl" size="md">
-        <div class="flex justify-between items-center mb-4">
-            <!-- <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Latest Customers</h5> -->
-            <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
-                {item.name}
-            </p>
-            <a href="/" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"> edit </a>
-        </div>
-        <Listgroup items={veg_list} let:item class="border-0 dark:!bg-transparent">
-            <div class="flex items-center space-x-4 rtl:space-x-reverse">
-                <p class="text-xs font-medium text-gray-900 truncate dark:text-white">
-                    {item.name}
-                    {item.value}
-                    {item.unit}
-                </p>
-                <p class="text-xs text-gray-500 truncate dark:text-gray-400">
-                    {item.expiration_date}
-                </p>
-            </div>
-        </Listgroup>
-    </Card>
+    <div class="flex justify-between items-center mb-4">
+        <!-- <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Latest Customers</h5> -->
+        <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
+            {item.name}
+        </p>
+        <a href="/" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"> edit </a>
+    </div>
+    <Listgroup items={veg_list} let:item>
+        <p class="text-xs font-medium text-gray-900 truncate dark:text-white">
+            {item.name}
+            {item.value}
+            {item.unit}
+        </p>
+        <p class="text-xs text-gray-500 truncate dark:text-gray-400">
+            {item.expiration_date}
+        </p>
+    </Listgroup>
 
 </Listgroup>
-
-
