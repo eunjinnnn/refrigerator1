@@ -67,11 +67,7 @@
 
 
 <div class="flex flex-wrap gap-2">
-    <Button outline color="green">
-        <a href="/add">ADD</a>
-    </Button>
-    <Button outline color="red">
-        <a href="/delete">DELETE</a>
-    </Button>
+    <Button size = 'xs' outline color="green" href="/add"> ADD </Button>
+    <Button sixe = 'xs' outline color="red" href="/delete"> DELETE </Button>
 </div>
 
