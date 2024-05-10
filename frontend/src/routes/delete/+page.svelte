@@ -1,54 +1,59 @@
 <script>
-  import { Input, Label, Helper, Button, Checkbox, A , Select} from 'flowbite-svelte';
-
+  import { Label, Select, Input, FloatingLabelInput } from 'flowbite-svelte';
+  
   let cat_selected;
   let unit_selected;
   let volume;
   let foodname;
-  
+
   let categories = [
-        { value: 1, name: 'VEGETABLES' },
-        { value: 2, name: 'DRINKS' },
-        { value: 3, name: 'FROZEN FOOD' },
-        { value: 4, name: 'ETC' }
-    ];
+      { value: 1, name: 'VEGETABLES' },
+      { value: 2, name: 'DRINKS' },
+      { value: 3, name: 'FROZEN FOOD' },
+      { value: 4, name: 'ETC' }
+  ];
 
   let units = [
-        { value: 1, name: '개' },
-        { value: 2, name: 'L' },
-        { value: 3, name: '조각' }
-    ];
+      { value: 1, name: '개' },
+      { value: 2, name: 'L' },
+      { value: 3, name: '조각' }
+  ];
+
+  function handleCategoryChange(event) {=== parseInt(event.target.value));
+  }
+
+  function handleUnitChange(event) {
+      unit_selected = units.find(unit => unit.value === parseInt(event.target.value));
+  }
+      cat_selected = categories.find(cat => cat.value 
 </script>
 
-<form>
-  <div class="grid gap-6 mb-6 sm:grid-cols-3">
-    <div>
-      <Label for="purchaseDate" class="mb-2">Category</Label>
-      <Select id="select-category" size="md" items={categories} placeholder="Category"/>
-    </div>
-    <div>
-      <Label for="purchaseDate" class="mb-2">Foodname</Label>
-      <Input type="text" id="foodname" placeholder="Foodname" required/>
-    </div>
-    <div>
-      <Label for="purchaseDate" class="mb-2">Volume</Label>
-      <Input type="number" id="volume" placeholder="Volume" required />
-    </div>
-    <div>
-      <Label for="purchaseDate" class="mb-2">Unit</Label>
-      <Select id="select-category" size="md" items={units} placeholder="Unit"/>
-    </div>
-    <div>
-      <Label for="purchaseDate" class="mb-2">Purchase Date</Label>
-      <Input type="date" id="purchaseDate" required />
-    </div>
-    <div>
-      <Label for="expirationDate" class="mb-2">Expiration date</Label>
-      <Input type="date" id="expirationDate" required />
-    </div>
+<Label>
+  <Select class="mt-2" on:change={handleCategoryChange}>
+      {#each categories as category}
+          <option value={category.value}>{category.value}</option>
+      {/each}
+  </Select>
+  <div class="mt-2">
+    <FloatingLabelInput bind:value={foodname} style="outlined" id="default_outlined" name="default_outlined" type="text">
+        음식 이름
+    </FloatingLabelInput>
   </div>
-  <div>
-
+  <div class="mt-2">
+    <FloatingLabelInput bind:value={volume} style="outlined" id="default_outlined" name="default_outlined" type="text">
+      양
+  </FloatingLabelInput>
   </div>
-  <Button type="submit">ADD</Button>
-</form>
+  <Select class="mt-2" on:change={handleUnitChange}>
+      {#each units as unit}
+          <option value={unit.value}>{unit.name}</option>
+      {/each}
+  </Select>
+  <div class = 'flex '>
+      <p>{cat_selected ? cat_selected.name : ''}</p>
+      <p>{foodname}</p>
+      <p>{volume}</p>
+      <p>{unit_selected ? unit_selected.name : ''}</p>
+  </div>
+  
+</Label>
