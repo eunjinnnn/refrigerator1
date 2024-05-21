@@ -30,7 +30,32 @@
   }
 </script>
 
-<Listgroup class="bg-orange-50 mt-2 mb-2 container mx-auto border-lime-950" items={categories} let:item>
+{#each categories as category}
+    <div class ='bg-orange-50 mt-2 mb-2 container mx-auto rounded border border-lime-950 overflow-hidden'>
+        <div class="flex justify-between items-center px-4 py-2">
+            <p class="font-serif text-sm font-bold text-lime-950 truncate dark:text-white"># {category.name}</p>
+            <div class="flex space-x-2">
+                <a href="/add" class="font-serif text-xs font-medium text-primary-600 hover:underline dark:text-primary-500"> ADD </a>
+                <a href="/delete" class="font-serif text-xs font-medium text-primary-600 hover:underline dark:text-primary-500"> DEL </a>
+            </div>
+        </div>
+        <div class="flex flex-wrap">
+            {#each filteredItems(category.id) as food}
+                <div class="w-1/3 p-2">
+                    <Card class="w-full relative bg-white border-1 border-lime-950 rounded-lg">
+                        <div class="flex flex-col justify-center items-center">
+                            <p class="font-serif text-xs text-lime-950 font-bold">{food.foodname} {food.volume}{food.unit}</p>
+                            <p class="{isExpired(food.expiration_date) ? 'text-red-500' : 'text-lime-950'} text-xs">{food.expiration_date}</p>
+                        </div>
+                    </Card>
+                </div>
+            {/each}
+        </div>
+    </div>
+{/each}
+
+
+<!-- <Listgroup class="bg-orange-50 mt-2 mb-2 container mx-auto border-2 border-lime-950" items={categories} let:item>
     <div class="flex justify-between items-center mb-4">
         <p class="font-serif text-sm font-bold text-lime-950 truncate dark:text-white">{item.name}</p>
         <div>
@@ -42,7 +67,7 @@
     <div class="flex flex-wrap -mx-2">
         {#each filteredItems(item.id) as food}
             <div class="w-1/3 p-1">
-                <Card class="w-full relative bg-transparent border-1px border-lime-800">
+                <Card class="w-full relative bg-white border-1px border-lime-950">
                     <div class="flex-wrap text-center">
                         <div class="font-serif text-xs text-lime-950 font-bold">{food.foodname} {food.volume}{food.unit}</div>
                         <div class="font-serif text-xs {isExpired(food.expiration_date) ? 'text-red-500' : 'text-lime-950'}">{food.expiration_date}</div>
@@ -51,5 +76,5 @@
             </div>
         {/each}
     </div>
-</Listgroup>
+</Listgroup> -->
 
