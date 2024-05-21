@@ -47,7 +47,8 @@
     }
 </script>
   
-<form class='container mx-auto' on:submit|preventDefault={addItem}>
+<form class='container mx-auto mt-2 mb-2' on:submit|preventDefault={addItem}>
+    <div class="mb-2 font-serif border-b border-lime-950 border-opacity-30 font-semibold">ADD FORM</div>
     <div class='flex flex-wrap -mx-2 p-2'>
         <Label for="Category" class="mb-2 text-xs">Category</Label>
         <Select id="select-category" bind:value={cat_selected} style='font-size:x-small' size="sm" items={categories} placeholder="Category"/>
@@ -77,11 +78,12 @@
         </div>
     </div>
     <div class="flex justify-end">
-        <Button type="submit" color='green' class="text-xs" style="font-size: x-small;">ADD</Button>
+        <Button type="submit" class="text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size = 'xs'>ADD</Button>
     </div>
 </form>
   
 <div class="container mx-auto">
+    <div class="mt-2 mb-2 font-serif border-b border-lime-950 border-opacity-30 font-semibold">ADD LIST</div>
     <div class="flex flex-wrap -mx-2">
         {#each lists as l}
             <div class="w-1/3 p-2">
@@ -92,20 +94,20 @@
                         <div class="text-xxs">{l.purchaseDate}</div>
                         <div class="text-xxs">{l.expirationDate}</div>
                     </div>
-                    <Button type='button' class='absolute top-2 right-2 p-1 text-xxs border-none rounded-full' color = 'alternative'>X</Button>
+                    <Button type='button' class='absolute top-2 right-2 p-1 text-xxs border-none rounded-full hover:text-green-700' color = 'alternative'>X</Button>
                 </Card>
             </div>
         {/each}
     </div>
 
     {#if lists.length == 0}
-        <Alert color="yellow" class='mt-2 text-center'>
+        <Alert class='mt-2 text-center bg-lime-950 bg-opacity-10'>
             <span class="font-medium">No items!</span>
             Please add items using above form.
         </Alert>
     {:else}
         <div class="flex justify-end">
-            <Button type="submit" color='green' class="text-xs" style="font-size: x-small;">OK</Button>
+            <Button type="submit" class="text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size = 'xs'>OK</Button>
         </div>
     {/if}
 </div>

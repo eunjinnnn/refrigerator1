@@ -33,7 +33,7 @@
 {#each categories as category}
     <div class ='bg-orange-50 mt-2 mb-2 container mx-auto rounded border-dashed border-lime-950 overflow-hidden'>
         <div class="flex justify-between items-center px-4 py-2">
-            <p class="font-serif text-sm font-bold text-lime-950 truncate dark:text-white"># {category.name}</p>
+            <p class="font-serif text-sm font-semibold text-lime-950 truncate dark:text-white"># {category.name}</p>
             <div class="flex space-x-2">
                 <a href="/add" class="font-serif text-xs font-medium text-primary-600 hover:underline dark:text-primary-500"> ADD </a>
                 <a href="/delete" class="font-serif text-xs font-medium text-primary-600 hover:underline dark:text-primary-500"> DEL </a>
