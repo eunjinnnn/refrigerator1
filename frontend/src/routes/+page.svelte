@@ -31,7 +31,7 @@
 </script>
 
 {#each categories as category}
-    <div class ='bg-orange-50 mt-2 mb-2 container mx-auto rounded border border-lime-950 overflow-hidden'>
+    <div class ='bg-orange-50 mt-2 mb-2 container mx-auto rounded border-dashed border-lime-950 overflow-hidden'>
         <div class="flex justify-between items-center px-4 py-2">
             <p class="font-serif text-sm font-bold text-lime-950 truncate dark:text-white"># {category.name}</p>
             <div class="flex space-x-2">
@@ -39,12 +39,13 @@
                 <a href="/delete" class="font-serif text-xs font-medium text-primary-600 hover:underline dark:text-primary-500"> DEL </a>
             </div>
         </div>
-        <div class="flex flex-wrap">
+        <div class="border-b border-lime-950 border-opacity-30"></div>
+        <div class="flex flex-wrap mt-2">
             {#each filteredItems(category.id) as food}
-                <div class="w-1/3 p-2">
+                <div class="w-1/3 p-1">
                     <Card class="w-full relative bg-white border-1 border-lime-950 rounded-lg">
                         <div class="flex flex-col justify-center items-center">
-                            <p class="font-serif text-xs text-lime-950 font-bold">{food.foodname} {food.volume}{food.unit}</p>
+                            <p class="font-serif text-xs text-lime-950 font-bold whitespace-nowrap">{food.foodname} {food.volume}{food.unit}</p>
                             <p class="{isExpired(food.expiration_date) ? 'text-red-500' : 'text-lime-950'} text-xs">{food.expiration_date}</p>
                         </div>
                     </Card>
