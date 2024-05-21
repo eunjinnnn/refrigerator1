@@ -20,49 +20,45 @@
         }
     ]
 
-    let veg_list = [
+    let item_list = [
         {
-            name: '양파',
-            value: '5',
+            foodname: '양파',
+            volume: '5',
             unit: '개',
             expiration_date: '2024-05-03'
         },
         {
-            name: '대파',
-            value: '5',
+            foodname: '대파',
+            volume: '5',
             unit: '개',
             expiration_date: '2024-05-04'
         },
         {
-            name: '당근',
-            value: '5',
+            foodname: '당근',
+            volume: '5',
             unit: '개',
             expiration_date: '2024-05-05'
         }
     ];
 </script>
 
-<Listgroup items={categories} let:item>
-    <Card padding="xl" size="md">
-        <div class="flex justify-between items-center mb-4">
-            <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
-                {item.name}
-            </p>
-            <a href="/" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"> edit </a>
-        </div>
-        <Listgroup items={veg_list} let:item class="border-0 dark:!bg-transparent">
-            <div class="flex items-center space-x-4 rtl:space-x-reverse">
-                <p class="text-xs font-medium text-gray-900 truncate dark:text-white">
-                    {item.name}
-                    {item.value}
-                    {item.unit}
-                </p>
-                <p class="text-xs text-gray-500 truncate dark:text-gray-400">
-                    {item.expiration_date}
-                </p>
+<Listgroup class = 'mt-2 container mx-auto' items={categories} let:item>
+    <div class="flex justify-between items-center mb-4">
+        <p class="text-sm font-bold text-gray-900 truncate dark:text-white"> #{item.name} </p>
+        <a href="/" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"> EDIT </a>
+    </div>
+    <div class = 'flex flex-wrap -mx-2'>
+        {#each item_list as item}
+            <div class="w-1/3 p-2">
+                <Card class="w-full relative">
+                    <div class="flex-wrap text-center">
+                        <div class="text-xs">{item.foodname} {item.volume}{item.unit}</div>
+                        <div class="text-xxs">{item.expiration_date}</div>
+                    </div>
+                </Card>
             </div>
-        </Listgroup>
-    </Card>
+        {/each}
+    </div>
 </Listgroup>
 
 
