@@ -30,28 +30,26 @@
   }
 </script>
 
-<Listgroup class="mt-2 container mx-auto" items={categories} let:item>
+<Listgroup class="bg-orange-50 mt-2 mb-2 container mx-auto border-lime-950" items={categories} let:item>
     <div class="flex justify-between items-center mb-4">
-        <p class="text-sm font-bold text-gray-900 truncate dark:text-white">{item.name}</p>
-        <a href="/" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"> EDIT </a>
+        <p class="font-serif text-sm font-bold text-lime-950 truncate dark:text-white">{item.name}</p>
+        <div>
+            <a href="/add" class="font-serif text-xs font-medium text-primary-600 hover:underline dark:text-primary-500"> ADD </a>
+            <a href="/delete" class="font-serif text-xs font-medium text-primary-600 hover:underline dark:text-primary-500"> DEL </a>
+        </div>
+        
     </div>
     <div class="flex flex-wrap -mx-2">
         {#each filteredItems(item.id) as food}
             <div class="w-1/3 p-1">
-                <Card class="w-full relative">
+                <Card class="w-full relative bg-transparent border-1px border-lime-800">
                     <div class="flex-wrap text-center">
-                        <div class="text-xs">{food.foodname} {food.volume}{food.unit}</div>
-                        <div class="text-xs {isExpired(food.expiration_date) ? 'text-red-500' : ''}">{food.expiration_date}</div>
+                        <div class="font-serif text-xs text-lime-950 font-bold">{food.foodname} {food.volume}{food.unit}</div>
+                        <div class="font-serif text-xs {isExpired(food.expiration_date) ? 'text-red-500' : 'text-lime-950'}">{food.expiration_date}</div>
                     </div>
                 </Card>
             </div>
         {/each}
     </div>
 </Listgroup>
-
-
-<div class="flex flex-wrap gap-2">
-    <Button size = 'xs' outline color="green" href="/add"> ADD </Button>
-    <Button sixe = 'xs' outline color="red" href="/delete"> DELETE </Button>
-</div>
 

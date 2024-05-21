@@ -1,7 +1,7 @@
 <script>
     import { Input, Label, Button, Select, Card, Alert } from 'flowbite-svelte';
 
-    let add_lists = [];
+    let lists = [];
     let cat_selected = '';
     let unit_selected = '';
     let volume = '';
@@ -83,14 +83,14 @@
   
 <div class="container mx-auto">
     <div class="flex flex-wrap -mx-2">
-        {#each add_lists as l}
+        {#each lists as l}
             <div class="w-1/3 p-2">
                 <Card class="w-full relative">
                     <div class="flex-wrap text-center">
-                        <div class="text-xs font-bold">#{l.category}</div>
+                        <div class="text-xs font-bold">{l.category}</div>
                         <div class="text-xs">{l.foodname} {l.volume}{l.unit}</div>
                         <div class="text-xxs">{l.purchaseDate}</div>
-                        <div class="text-xs">{l.expirationDate}</div>
+                        <div class="text-xxs">{l.expirationDate}</div>
                     </div>
                     <Button type='button' class='absolute top-2 right-2 p-1 text-xxs border-none rounded-full' color = 'alternative'>X</Button>
                 </Card>
@@ -98,17 +98,14 @@
         {/each}
     </div>
 
-    {#if add_lists.length == 0}
-        <!-- <Alert color="green" class='mt-2 text-center'>
+    {#if lists.length == 0}
+        <Alert color="yellow" class='mt-2 text-center'>
             <span class="font-medium">No items!</span>
             Please add items using above form.
-        </Alert> -->
-        <div></div>
+        </Alert>
     {:else}
         <div class="flex justify-end">
             <Button type="submit" color='green' class="text-xs" style="font-size: x-small;">OK</Button>
         </div>
     {/if}
-
-
 </div>
