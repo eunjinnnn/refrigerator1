@@ -1,7 +1,7 @@
 <script>
     import { Input, Label, Button, Select, Card, Alert } from 'flowbite-svelte';
 
-    let lists = [];
+    let add_lists = [];
     let cat_selected = '';
     let unit_selected = '';
     let volume = '';
@@ -55,7 +55,7 @@
     <div class="flex flex-wrap -mx-2">
         <div class='flex flex-col w-1/3 p-2'>
             <Label for="Foodname" class="mb-2 text-xs">Foodname</Label>
-            <Input type="text" bind:value={foodname} class='rounded' id="foodname" style='font-size:x-small' placeholder="Foodname" required/>
+            <Input type="text" bind:value={foodname} class='border rounded border-gray-300' id="foodname" style='font-size:x-small' placeholder="Foodname" required/>
         </div>
         <div class='flex flex-col w-1/3 p-2'>
             <Label for="Volume" class="mb-2 text-xs">Volume</Label>
@@ -83,22 +83,22 @@
   
 <div class="container mx-auto">
     <div class="flex flex-wrap -mx-2">
-        {#each lists as l}
+        {#each add_lists as l}
             <div class="w-1/3 p-2">
-                <Card class="w-full">
+                <Card class="w-full relative">
                     <div class="flex-wrap text-center">
-                        <div class="text-sm">#{l.category}</div>
+                        <div class="text-xs font-bold">#{l.category}</div>
                         <div class="text-xs">{l.foodname} {l.volume}{l.unit}</div>
-                        <div class="text-xs">{l.purchaseDate}</div>
+                        <div class="text-xxs">{l.purchaseDate}</div>
                         <div class="text-xs">{l.expirationDate}</div>
                     </div>
-                    
+                    <Button type='button' class='absolute top-2 right-2 p-1 text-xxs border-none rounded-full' color = 'alternative'>X</Button>
                 </Card>
             </div>
         {/each}
     </div>
 
-    {#if lists.length == 0}
+    {#if add_lists.length == 0}
         <!-- <Alert color="green" class='mt-2 text-center'>
             <span class="font-medium">No items!</span>
             Please add items using above form.

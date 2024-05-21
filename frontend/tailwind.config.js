@@ -21,6 +21,9 @@ const config = {
           800: '#CC4522',
           900: '#A5371B'
         }
+      },
+      fontSize: {
+        'xxs': '0.625rem', // 10px
       }
     }
   }
