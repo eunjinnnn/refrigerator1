@@ -1,43 +1,116 @@
 <script>
-    import { Card, Listgroup, Avatar, Button } from 'flowbite-svelte';
+    import { Card, Input, Label, Button, Select } from 'flowbite-svelte';
 
     let categories = [
-    { id: 1, name: 'VEGETABLES' },
-    { id: 2, name: 'DRINKS' },
-    { id: 3, name: 'FROZEN FOOD' },
-    { id: 4, name: 'ETC' }
-  ];
+        { id: 1, name: 'VEGETABLES' },
+        { id: 2, name: 'DRINKS' },
+        { id: 3, name: 'FROZEN FOOD' },
+        { id: 4, name: 'ETC' }
+    ];
 
-  let item_list = [
-    { category: 1, foodname: '양파', volume: '5', unit: '개', expiration_date: '2024-05-24' },
-    { category: 1, foodname: '대파', volume: '5', unit: '개', expiration_date: '2024-05-23' },
-    { category: 1, foodname: '당근', volume: '5', unit: '개', expiration_date: '2024-05-05' },
-    { category: 1, foodname: '양배추', volume: '5', unit: '개', expiration_date: '2024-05-07' },
-    { category: 2, foodname: '사이다', volume: '2', unit: 'L', expiration_date: '2024-05-28' },
-    { category: 2, foodname: '콜라', volume: '2', unit: 'L', expiration_date: '2024-05-06' },
-    { category: 3, foodname: '만두', volume: '2', unit: '개', expiration_date: '2024-05-06' },
-    { category: 4, foodname: '다진마늘', volume: '10', unit: '조각', expiration_date: '2025-05-06' },
-  ];
+    let item_list = [
+        { category: 1, foodname: '양파', volume: '5', unit: '개', expiration_date: '2024-05-24' },
+        { category: 1, foodname: '대파', volume: '5', unit: '개', expiration_date: '2024-05-23' },
+        { category: 1, foodname: '당근', volume: '5', unit: '개', expiration_date: '2024-05-05' },
+        { category: 1, foodname: '양배추', volume: '5', unit: '개', expiration_date: '2024-05-07' },
+        { category: 2, foodname: '사이다', volume: '2', unit: 'L', expiration_date: '2024-05-28' },
+        { category: 2, foodname: '콜라', volume: '2', unit: 'L', expiration_date: '2024-05-06' },
+        { category: 3, foodname: '만두', volume: '2', unit: '개', expiration_date: '2024-05-06' },
+        { category: 4, foodname: '다진마늘', volume: '10', unit: '조각', expiration_date: '2025-05-06' },
+    ];
 
-  function filteredItems(categoryId) {
-    return item_list.filter(item => item.category === categoryId).sort((a, b) => {
-        return new Date(a.expiration_date) - new Date(b.expiration_date);
+    let units = [
+        { value: 1, name: '개' },
+        { value: 2, name: 'L' },
+        { value: 3, name: '조각' }
+    ];
+
+    function filteredItems(categoryId) {
+        return item_list.filter(item => item.category === categoryId).sort((a, b) => {
+            return new Date(a.expiration_date) - new Date(b.expiration_date);
     });
-  }
+    }
 
-  function isExpired(expiration_date) {
-    return new Date(expiration_date) < new Date();
-  }
+    function isExpired(expiration_date) {
+        return new Date(expiration_date) < new Date();
+    }
+
+    let lists = [];
+    let cat_selected = '';
+    let unit_selected = '';
+    let volume = '';
+    let foodname = '';
+    let purchaseDate = '';
+    let expirationDate = '';
+
+    
+    let isFormVisible = false;
+
+    function toggleFormVisibility() {
+        isFormVisible = !isFormVisible;
+    }
+
+    function addItem(event) {
+        event.preventDefault();
+        const selectedCategory = categories.find(cat => cat.value == cat_selected)?.name || '';
+        const selectedUnit = units.find(unit => unit.value == unit_selected)?.name || '';
+
+        lists.push({
+            foodname,
+            volume,
+            unit: selectedUnit,
+            category: selectedCategory,
+            purchaseDate,
+            expirationDate
+        });
+
+        foodname = '';
+        volume = '';
+        unit_selected = '';
+        cat_selected = '';
+        purchaseDate = '';
+        expirationDate = '';
+    }
+
+
 </script>
 
+
+<style>
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s, opacity 0.5s linear;
+    }
+    .modal.active {
+        visibility: visible;
+        opacity: 1;
+    }
+    .modal-content {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 80%;
+        max-width: 500px;
+    }
+</style>
+
+
+<!-- storage  -->
 {#each categories as category}
     <div class ='bg-orange-50 mt-2 mb-2 container mx-auto rounded border-dashed border-lime-950 overflow-hidden'>
         <div class="flex justify-between items-center px-4 py-2">
             <p class="font-serif text-sm font-semibold text-lime-950 truncate dark:text-white"># {category.name}</p>
-            <div class="flex space-x-2">
-                <a href="/add" class="font-serif text-xs font-medium text-primary-600 hover:underline dark:text-primary-500"> ADD </a>
-                <a href="/delete" class="font-serif text-xs font-medium text-primary-600 hover:underline dark:text-primary-500"> DEL </a>
-            </div>
+            <a href="#" on:click|preventDefault={toggleFormVisibility} class="font-serif text-lime-950 text-sm font-medium text-primary-600"> + </a>
         </div>
         <div class="border-b border-lime-950 border-opacity-30"></div>
         <div class="flex flex-wrap mt-2">
@@ -56,26 +129,43 @@
 {/each}
 
 
-<!-- <Listgroup class="bg-orange-50 mt-2 mb-2 container mx-auto border-2 border-lime-950" items={categories} let:item>
-    <div class="flex justify-between items-center mb-4">
-        <p class="font-serif text-sm font-bold text-lime-950 truncate dark:text-white">{item.name}</p>
-        <div>
-            <a href="/add" class="font-serif text-xs font-medium text-primary-600 hover:underline dark:text-primary-500"> ADD </a>
-            <a href="/delete" class="font-serif text-xs font-medium text-primary-600 hover:underline dark:text-primary-500"> DEL </a>
-        </div>
-        
-    </div>
-    <div class="flex flex-wrap -mx-2">
-        {#each filteredItems(item.id) as food}
-            <div class="w-1/3 p-1">
-                <Card class="w-full relative bg-white border-1px border-lime-950">
-                    <div class="flex-wrap text-center">
-                        <div class="font-serif text-xs text-lime-950 font-bold">{food.foodname} {food.volume}{food.unit}</div>
-                        <div class="font-serif text-xs {isExpired(food.expiration_date) ? 'text-red-500' : 'text-lime-950'}">{food.expiration_date}</div>
-                    </div>
-                </Card>
-            </div>
-        {/each}
-    </div>
-</Listgroup> -->
 
+<!-- modal -->
+<div class="modal {isFormVisible ? 'active' : ''}">
+    <div class="modal-content">
+        <form on:submit|preventDefault={addItem}>
+            <div class='flex flex-wrap -mx-2 p-2'>
+                <Label for="Category" class="mb-2 text-xs">Category</Label>
+                <Select id="select-category" bind:value={cat_selected} style='font-size:x-small' size="sm" items={categories} placeholder="Category"/>
+            </div>
+            <div class="flex flex-wrap -mx-2">
+                <div class='flex flex-col w-1/3 p-2'>
+                    <Label for="Foodname" class="mb-2 text-xs">Foodname</Label>
+                    <Input type="text" bind:value={foodname} class='border rounded border-gray-300' id="foodname" style='font-size:x-small' placeholder="Foodname" required/>
+                </div>
+                <div class='flex flex-col w-1/3 p-2'>
+                    <Label for="Volume" class="mb-2 text-xs">Volume</Label>
+                    <Input type="number" bind:value={volume} class='rounded' id="volume" style='font-size:x-small' placeholder="Volume" required />
+                </div>
+                <div class='flex flex-col w-1/3 p-2'>
+                    <Label for="Unit" class="mb-2 text-xs">Unit</Label>
+                    <Select id="select-unit" bind:value={unit_selected} class='' size="md" style='font-size:x-small' items={units} placeholder="Unit"/>
+                </div>
+            </div>
+            <div class="flex flex-wrap -mx-2">
+                <div class='flex flex-col w-1/2 p-2'>
+                    <Label for="purchaseDate" class="mb-2 text-xs">Purchase Date</Label>
+                    <Input type="date" bind:value={purchaseDate} class='' style='font-size:x-small' id="purchaseDate" required />
+                </div>
+                <div class='flex flex-col w-1/2 p-2'>
+                    <Label for="expirationDate" class="mb-2 text-xs">Expiration date</Label>
+                    <Input type="date" bind:value={expirationDate} class='' id="expirationDate" style='font-size:x-small' required />
+                </div>
+            </div>
+            <div class= 'flex justify-between'>
+                <Button type="button" on:click={toggleFormVisibility} class="flex text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size='xs'>BACK</Button>
+                <Button type="submit" class="flex text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size = 'xs'>ADD</Button>
+            </div>
+        </form>
+    </div>
+</div>
