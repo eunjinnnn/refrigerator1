@@ -80,7 +80,7 @@
 
 <Navbar class="bg-lime-950">
   <NavBrand href="/">
-    <span class="self-center font-serif text-orange-50 whitespace-nowrap text-lg font-semibold">FreshKeep</span>
+    <span class="self-center font-PoetsenOne text-orange-50 whitespace-nowrap text-xl font-extrabold">FreshKeep</span>
   </NavBrand>
   <NavHamburger />
   <NavUl {activeUrl} {activeClass} {nonActiveClass} color = 'bg-orange-50'>
@@ -97,4 +97,3 @@
       </div>
   </div>
 </div>
-

@@ -24,6 +24,10 @@ const config = {
       },
       fontSize: {
         'xxs': '0.625rem', // 10px
+      },
+      fontFamily: {
+        PoetsenOne: ['PoetsenOne', 'sans-serif'],
+        opensans: ['Open Sans', 'sans-serif'],
       }
     }
   }
