@@ -1,30 +1,37 @@
 <script>
+    import { Button } from 'flowbite-svelte';
     export let food;
     export let close;
+
+    let categories = [
+        { id: 1, name: 'VEGETABLES' },
+        { id: 2, name: 'DRINKS' },
+        { id: 3, name: 'FROZEN FOOD' },
+        { id: 4, name: 'ETC' }
+    ];
+
+    // food.category ID에 해당하는 카테고리 이름을 가져오는 함수
+    function getCategoryName(categoryId) {
+        const category = categories.find(cat => cat.id === categoryId);
+        return category ? category.name : 'Unknown';
+    }
 </script>
 
 {#if food}
 <div class="modal {food ? 'active' : ''}">
-    <div class="bg-white rounded-lg p-4 w-1/2 modal-content">
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="text-lg font-semibold">{food.foodname}</h2>
-            <button on:click={close} class="text-red-500">&times;</button>
+    <div class="bg-orange-50 rounded-lg p-4 w-1/2 modal-content">
+        <h2 class="text-lg text-lime-950 font-serif mb-2"><strong>{food.foodname} {food.volume} {food.unit}</strong></h2>
+        <div class="border-b border-lime-950 border-opacity-30 mb-2"></div>
+        <p class = 'font-serif'><strong>Category:</strong> {getCategoryName(food.category)}</p>
+        <p class = 'font-serif'><strong>Expiration Date:</strong> {food.expiration_date}</p>
+        <p class = 'font-serif'><strong>Purchase Date:</strong> {food.purchase_date}</p>
+        <div class= 'flex justify-between mt-2'>
+            <Button type="button" on:click={close} class="flex text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size='xs'>BACK</Button>
+            <Button type="button" class="flex text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size = 'xs'>EDIT</Button>
         </div>
-        <p><strong>Name:</strong> {food.foodname}</p>
-        <p><strong>Volume:</strong> {food.volume} {food.unit}</p>
-        <p><strong>Expiration Date:</strong> {food.expiration_date}</p>
     </div>
 </div>
 {/if}
-
-<!-- <div class="modal {food ? 'active' : ''}">
-    <div class="modal-content">
-        <form>
-            <div>hi</div>
-            <button on:click={close} class="text-red-500">&times;</button>
-        </form>
-    </div>
-</div> -->
 
 <style>
     .modal {
@@ -53,4 +60,3 @@
         max-width: 500px;
     }
 </style>
-
