@@ -34,15 +34,9 @@
     let purchaseDate = '';
     let expirationDate = '';
     let isFormVisible = false;
-
-    /**
-     * @type {string | null}
-     */
     let selectedFood = null; // 선택된 식품 정보를 저장하는 writable store
+    let isAddVisible = false;
 
-    /**
-     * @param {number} categoryId
-     */
     function filteredItems(categoryId) {
         return item_list.filter(item => item.category === categoryId).sort((a, b) => {
             return new Date(a.expiration_date) - new Date(b.expiration_date);
@@ -77,6 +71,7 @@
         cat_selected = '';
         purchaseDate = '';
         expirationDate = '';
+        toggleFormVisibility();
     }
 
     function showFoodDetails(food) {
@@ -86,6 +81,28 @@
     function closeFoodDetails() {
         selectedFood = null; // 선택된 식품 정보를 null로 설정하여 모달 닫기
     }
+
+    function deleteFood(food) {
+        item_list = item_list.filter(item => item !== food);
+        closeFoodDetails(); // Close the modal after deletion
+    }
+
+    function showEditForm(food) {
+        selectedFood = food;
+        cat_selected = categories.find(cat => cat.value == food.category)?.name || '';
+        unit_selected = units.find(unit => unit.value == food.unit)?.name || '';
+        volume = food.volume;
+        foodname = food.foodname;
+        purchaseDate = food.purchase_date;
+        expirationDate = food.expiration_date;
+        isFormVisible = true;
+        console.log(isFormVisible)
+    }
+
+    function addListVisibility() {
+        isAddVisible = !isAddVisible;
+    }
+
 </script>
 
 
@@ -119,7 +136,7 @@
 
 
 {#each categories as category}
-    <div class='bg-orange-50 mt-2 mb-2 container mx-auto rounded border-dashed border-lime-950 overflow-hidden'>
+    <div class='bg-orange-50 mt-2 mb-2 flex flex-col overflow-hidden'>
         <div class="flex justify-between items-center px-4 py-2">
             <p class="font-PoetsenOne text-sm font-semibold text-lime-950 truncate dark:text-white"># {category.name}</p>
             <div>
@@ -145,15 +162,22 @@
 {/each}
 
 {#if selectedFood}
-    <Modal food={selectedFood} close={closeFoodDetails} />
+    <Modal food={selectedFood} close={closeFoodDetails} {deleteFood} {showEditForm}/>
 {/if}
 
+<!-- svelte-ignore empty-block -->
+{#if isAddVisible}
+    <div> hi </div>
+{:else}
+    <Button type="button" on:click={addListVisibility} class="flex text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size='sm'>TODAY'S COOKING</Button>
+{/if}
 
 
 <!-- modal -->
 <div class="modal {isFormVisible ? 'active' : ''}">
-    <div class="modal-content">
-        <form on:submit|preventDefault={addItem}>
+    <div class="modal-content relative"> <!-- relative 클래스 추가 -->
+        <button on:click={toggleFormVisibility} class="absolute top-0 right-0 mt-2 mr-2 text-lime-950 text-lg">&times;</button> 
+        <form on:submit|preventDefault={addItem} > <!-- 버튼과 겹치지 않게 margin-top 추가 -->
             <div class='flex flex-wrap -mx-2 p-2'>
                 <Label for="Category" class="mb-2 text-xs">Category</Label>
                 <Select id="select-category" bind:value={cat_selected} style='font-size:x-small' size="sm" items={categories} placeholder="Category"/>
@@ -182,9 +206,8 @@
                     <Input type="date" bind:value={expirationDate} class='' id="expirationDate" style='font-size:x-small' required />
                 </div>
             </div>
-            <div class= 'flex justify-between'>
-                <Button type="button" on:click={toggleFormVisibility} class="flex text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size='xs'>BACK</Button>
-                <Button type="submit" class="flex text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size = 'xs'>ADD</Button>
+            <div class='flex justify-between'>
+                <Button type="submit" class="flex text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size='xs'>ADD</Button>
             </div>
         </form>
     </div>

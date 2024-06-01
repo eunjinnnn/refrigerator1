@@ -80,7 +80,7 @@
 
 <Navbar class="bg-lime-950">
   <NavBrand href="/">
-    <span class="self-center font-PoetsenOne text-orange-50 whitespace-nowrap text-xl font-extrabold">FreshKeep</span>
+    <span class="self-center font-PoetsenOne text-orange-50 whitespace-nowrap text-lg font-extrabold">FreshKeep</span>
   </NavBrand>
   <NavHamburger />
   <NavUl {activeUrl} {activeClass} {nonActiveClass} color = 'bg-orange-50'>
@@ -91,8 +91,8 @@
 </Navbar>
 
 <div class="min-h-screen bg-orange-50">
-  <div class="py-2 sm:py-4 px-2 sm:px-4">
-      <div class="container mx-auto">
+  <div class="py-2 sm:py-4 px-2 sm:px-6">
+      <div class="flex flex flex-col">
           <slot></slot>
       </div>
   </div>

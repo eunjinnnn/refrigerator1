@@ -2,6 +2,8 @@
     import { Button } from 'flowbite-svelte';
     export let food;
     export let close;
+    export let deleteFood;
+    export let showEditForm;
 
     let categories = [
         { id: 1, name: 'VEGETABLES' },
@@ -20,14 +22,18 @@
 {#if food}
 <div class="modal {food ? 'active' : ''}">
     <div class="bg-orange-50 rounded-lg p-4 w-1/2 modal-content">
-        <h2 class="text-lg text-lime-950 font-PoetsenOne mb-2"><strong>{food.foodname} {food.volume}{food.unit}</strong></h2>
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg text-lime-950 font-PoetsenOne"><strong>{food.foodname} {food.volume}{food.unit}</strong></h2>
+            <button on:click={close} class="text-lime-950 text-lg flex items-center ">&times;</button>
+        </div>
+
         <div class="border-b border-lime-950 border-opacity-30 mb-2"></div>
-        <p class = 'font-PoetsenOne'><strong>Category:</strong> {getCategoryName(food.category)}</p>
-        <p class = 'font-PoetsenOne'><strong>Expiration Date:</strong> {food.expiration_date}</p>
-        <p class = 'font-PoetsenOne'><strong>Purchase Date:</strong> {food.purchase_date}</p>
-        <div class= 'flex justify-between mt-2'>
-            <Button type="button" on:click={close} class="flex font-PoetsenOne text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size='xs'>BACK</Button>
-            <Button type="button" class="flex font-PoetsenOne text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size = 'xs'>EDIT</Button>
+        <p class='font-PoetsenOne'><strong>Category:</strong> {getCategoryName(food.category)}</p>
+        <p class='font-PoetsenOne'><strong>Expiration Date:</strong> {food.expiration_date}</p>
+        <p class='font-PoetsenOne'><strong>Purchase Date:</strong> {food.purchase_date}</p>
+        <div class='flex justify-between mt-2'>
+            <Button type="button" on:click={() => deleteFood(food)} class="flex font-PoetsenOne text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size='xs'>DELETE</Button>
+            <Button type="button" on:click={() => editFood(food)} class="flex font-PoetsenOne text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size='xs'>EDIT</Button>
         </div>
     </div>
 </div>
