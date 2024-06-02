@@ -34,6 +34,14 @@
     }
 </script>
 
+<div class="flex justify-between items-center px-4 py-2">
+    <p class="font-PoetsenOne text-sm font-semibold text-lime-950 truncate dark:text-white"># TODAY'S COOKING</p>
+    <div>
+        <a href="#" on:click|preventDefault={toggleFormVisibility} class="font-serif text-lime-950 text-sm font-medium text-primary-600"> + </a>
+    </div>
+</div>
+<div class="border-b border-lime-950 border-opacity-30"></div>
+
 <div class="container mx-auto">
     {#each forms as form, index}
         <div class="flex space-x-2 mb-4">

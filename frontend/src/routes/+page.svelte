@@ -148,7 +148,7 @@
             {#each filteredItems(category.id) as food}
                 <div class="w-1/3 p-1">
                     <button on:click={() => showFoodDetails(food)} class="cursor-pointer w-full relative bg-white border-1 border-lime-950 rounded-lg focus:outline-none">
-                        <Card class="w-full relative bg-white border-1 border-lime-950 rounded-lg">
+                        <Card class="relative bg-white border-1 border-lime-950 rounded-lg">
                             <div class="flex flex-col justify-center items-center">
                                 <p class="font-PoetsenOne text-xs text-lime-950 font-bold whitespace-nowrap">{food.foodname} {food.volume}{food.unit}</p>
                                 <p class="{isExpired(food.expiration_date) ? 'text-red-500' : 'text-lime-950'} text-xs font-PoetsenOne">{food.expiration_date}</p>
