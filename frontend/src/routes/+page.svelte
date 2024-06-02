@@ -1,6 +1,6 @@
 <script>
     import { Card, Input, Label, Button, Select } from 'flowbite-svelte';
-    import Modal from './modal_detail.svelte';
+    import ModalDetail from './modal_detail.svelte';
 
     let categories = [
         { id: 1, name: 'VEGETABLES' },
@@ -36,6 +36,7 @@
     let isFormVisible = false;
     let selectedFood = null; // 선택된 식품 정보를 저장하는 writable store
     let isAddVisible = false;
+    // let isEditVisible = false
 
     function filteredItems(categoryId) {
         return item_list.filter(item => item.category === categoryId).sort((a, b) => {
@@ -162,15 +163,18 @@
 {/each}
 
 {#if selectedFood}
-    <Modal food={selectedFood} close={closeFoodDetails} {deleteFood} {showEditForm}/>
+    <ModalDetail food={selectedFood} close={closeFoodDetails} {deleteFood} {showEditForm}/>
 {/if}
 
+{#if isEditVisible}
+    <div>hi</div>
+{/if}
 <!-- svelte-ignore empty-block -->
-{#if isAddVisible}
+<!-- {#if isAddVisible}
     <div> hi </div>
 {:else}
     <Button type="button" on:click={addListVisibility} class="flex text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size='sm'>TODAY'S COOKING</Button>
-{/if}
+{/if} -->
 
 
 <!-- modal -->
