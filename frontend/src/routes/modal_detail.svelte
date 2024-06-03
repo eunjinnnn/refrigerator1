@@ -128,7 +128,7 @@
         <form on:submit={editFood}>
             <div class="flex flex-col mt-2 p-2">
                 <label for="category" class="flex font-PoetsenOne">Category</label>
-                <select id="category" bind:value={food.category} class="flex w-full p-2 border mt-1" style='border-radius: 8px;' >
+                <select id="category" bind:value={food.category} class="flex w-full p-2 mt-1 border-opacity-30" style='border-radius: 8px;' >
                     {#each categories as category}
                         <option value={category.id}>{category.name}</option>
                     {/each}
@@ -152,14 +152,15 @@
                     </select>
                 </div>
             </div>
-            
-            <div class="mt-2 p-2">
-                <label for="expiration_date" class="font-PoetsenOne">Expiration Date</label>
-                <input type="date" id="expiration_date" bind:value={food.expiration_date} style='border-radius: 8px;' class="w-full p-2"/>
-            </div>
-            <div class="mt-2 p-2">
-                <label for="purchase_date" class="font-PoetsenOne">Purchase Date</label>
-                <input type="date" id="purchase_date" bind:value={food.purchase_date} style='border-radius: 8px; margin-top:2px' class="w-full p-2"/>
+            <div class="flex flex-wrap">
+                <div class="flex flex-col w-1/2 p-2">
+                    <label for="expiration_date" class="font-PoetsenOne">Expiration Date</label>
+                    <input type="date" id="expiration_date" bind:value={food.purchase_date} style='border-radius: 8px; margin-top:2px' class="w-full p-2"/>
+                </div>
+                <div class="flex flex-col w-1/2 p-2">
+                    <label for="purchase_date" class="font-PoetsenOne">Purchase Date</label>
+                    <input type="date" id="purchase_date" bind:value={food.expiration_date} style='border-radius: 8px; margin-top:2px' class="w-full p-2"/>
+                </div>
             </div>
             <div class="flex justify-end p-2">
                 <Button type="submit" class="flex font-PoetsenOne text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size='xs'>SAVE</Button>

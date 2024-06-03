@@ -137,9 +137,9 @@
 
 
 {#each categories as category}
-    <div class='bg-neutral-50 flex flex-col mb-2 overflow-hidden'>
+    <div class='bg-orange-50[.6] flex flex-col mb-2 overflow-hidden'>
         <div class="flex justify-between items-center px-4 py-2">
-            <p class="font-PoetsenOne text-lg font-bold text-lime-800"># {category.name}</p>
+            <p class="font-PoetsenOne text-lg font-bold text-lime-900"># {category.name}</p>
             <div>
                 <a href="#" on:click|preventDefault={toggleFormVisibility} class="font-serif text-lime-950 text-sm font-medium text-primary-600"> + </a>
             </div>
@@ -149,10 +149,10 @@
             {#each filteredItems(category.id) as food}
                 <div class="w-1/3 p-1">
                     <button on:click={() => showFoodDetails(food)} class="cursor-pointer w-full relative bg-white border-1 border-lime-950 rounded-lg focus:outline-none">
-                        <Card class="relative bg-white border-1 border-lime-950 rounded-lg">
+                        <Card class="relative border-1 border-lime-950 rounded-lg">
                             <div class="flex flex-col justify-center items-center">
-                                <p class="font-PoetsenOne text-lg text-lime-950 font-bold whitespace-nowrap">{food.foodname} {food.volume}{food.unit}</p>
-                                <p class="{isExpired(food.expiration_date) ? 'text-red-500' : 'text-lime-950'} text-xs font-PoetsenOne">{food.expiration_date}</p>
+                                <p class="font-PoetsenOne text-lg text-lime-950 font-semibold whitespace-nowrap">{food.foodname} {food.volume}{food.unit}</p>
+                                <p class="{isExpired(food.expiration_date) ? 'text-red-500' : 'text-lime-950'} text-sm font-PoetsenOne">{food.expiration_date}</p>
                             </div>
                         </Card>
                     </button>
@@ -180,37 +180,49 @@
 <!-- modal -->
 <div class="modal {isFormVisible ? 'active' : ''}">
     <div class="modal-content relative"> <!-- relative 클래스 추가 -->
-        <button on:click={toggleFormVisibility} class="absolute top-0 right-0 mt-2 mr-2 text-lime-950 text-lg">&times;</button> 
+        <div class="flex justify-between items-center mb-2">
+            <h2 class="text-lg text-lime-950 font-PoetsenOne"><strong>Add Food</strong></h2>
+            <button on:click={toggleFormVisibility} class="text-lime-950 text-lg flex items-center ">&times;</button>
+        </div>
+        
         <form on:submit|preventDefault={addItem} > <!-- 버튼과 겹치지 않게 margin-top 추가 -->
             <div class='flex flex-wrap -mx-2 p-2'>
-                <Label for="Category" class="mb-2 text-xs">Category</Label>
-                <Select id="select-category" bind:value={cat_selected} style='font-size:x-small' size="sm" items={categories} placeholder="Category"/>
+                <label for="category" class="flex font-PoetsenOne">Category</label>
+                <select id="category" bind:value={cat_selected} class="flex w-full p-2 border mt-1" style='border-radius: 8px;' >
+                    {#each categories as category}
+                        <option value={category.id}>{category.name}</option>
+                    {/each}
+                </select>
             </div>
             <div class="flex flex-wrap -mx-2">
                 <div class='flex flex-col w-1/3 p-2'>
-                    <Label for="Foodname" class="mb-2 text-xs">Foodname</Label>
-                    <Input type="text" bind:value={foodname} class='border rounded border-gray-300' id="foodname" style='font-size:x-small' placeholder="Foodname" required/>
+                    <label for="foodname" class="flex font-PoetsenOne">Food Name</label>
+                    <input type="text" bind:value={foodname} class='flex font-PoetsenOne mt-1' style='border-radius: 8px;' id="foodname" placeholder="Foodname" required/>
                 </div>
-                <div class='flex flex-col w-1/3 p-2'>
-                    <Label for="Volume" class="mb-2 text-xs">Volume</Label>
-                    <Input type="number" bind:value={volume} class='rounded' id="volume" style='font-size:x-small' placeholder="Volume" required />
+                <div class="flex flex-col w-1/3 p-2">
+                    <label for="volume" class="flex font-PoetsenOne">Volume</label>
+                    <input type="number" id="volume" bind:value={volume} style='border-radius: 8px;' class="flex font-PoetsenOne mt-1"/>
                 </div>
-                <div class='flex flex-col w-1/3 p-2'>
-                    <Label for="Unit" class="mb-2 text-xs">Unit</Label>
-                    <Select id="select-unit" bind:value={unit_selected} class='' size="md" style='font-size:x-small' items={units} placeholder="Unit"/>
+                <div class="flex flex-col w-1/3 p-2">
+                    <label for="unit" class="flex font-PoetsenOne">Unit</label>
+                    <select id="unit" bind:value={unit_selected} style='border-radius: 8px;' class="flex font-PoetsenOne mt-1">
+                        {#each units as unit}
+                            <option value={unit.value}>{unit.name}</option>
+                        {/each}
+                    </select>
                 </div>
             </div>
             <div class="flex flex-wrap -mx-2">
-                <div class='flex flex-col w-1/2 p-2'>
-                    <Label for="purchaseDate" class="mb-2 text-xs">Purchase Date</Label>
-                    <Input type="date" bind:value={purchaseDate} class='' style='font-size:x-small' id="purchaseDate" required />
+                <div class="flex flex-col w-1/2 p-2">
+                    <label for="expiration_date" class="font-PoetsenOne">Expiration Date</label>
+                    <input type="date" id="expiration_date" bind:value={purchaseDate} style='border-radius: 8px; margin-top:2px' class="w-full p-2"/>
                 </div>
-                <div class='flex flex-col w-1/2 p-2'>
-                    <Label for="expirationDate" class="mb-2 text-xs">Expiration date</Label>
-                    <Input type="date" bind:value={expirationDate} class='' id="expirationDate" style='font-size:x-small' required />
+                <div class="flex flex-col w-1/2 p-2">
+                    <label for="purchase_date" class="font-PoetsenOne">Purchase Date</label>
+                    <input type="date" id="purchase_date" bind:value={expirationDate} style='border-radius: 8px; margin-top:2px' class="w-full p-2"/>
                 </div>
             </div>
-            <div class='flex justify-between'>
+            <div class='flex justify-end mt-2'>
                 <Button type="submit" class="flex text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size='xs'>ADD</Button>
             </div>
         </form>

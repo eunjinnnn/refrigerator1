@@ -6,19 +6,19 @@
   let nonActiveClass = 'text-lime-950 hover:bg-stone-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent';
 </script>
 
-<Navbar class="bg-orange-50">
+<Navbar class="bg-[#faf6ed]/50">
   <NavBrand href="/">
-    <span class="font-PoetsenOne text-lime-800 whitespace-nowrap text-2xl md:text-3xl font-extrabold">FreshKeep</span>
+    <span class="font-PoetsenOne text-lime-900 whitespace-nowrap text-2xl md:text-3xl font-extrabold">FreshKeep</span>
   </NavBrand>
   <NavHamburger />
-  <NavUl {activeUrl} {activeClass} {nonActiveClass} color='bg-orange-50'>
-    <NavLi href="/my_refrigerator" size="lg" class="font-PoetsenOne text-lg md:text-xl border-b-2 border-transparent hover:border-lime-800">MY REFRIGERATOR</NavLi>
-    <NavLi href="/food_diary" size="lg" class="font-PoetsenOne text-lg md:text-xl border-b-2 border-transparent hover:border-lime-800">FOOD DIARY</NavLi>
-    <NavLi href="/receipe" size="lg" class="font-PoetsenOne text-lg md:text-xl border-b-2 border-transparent hover:border-lime-800">RECEIPE</NavLi>
+  <NavUl {activeUrl} {activeClass} {nonActiveClass} color='bg-[#faf6ed]'>
+    <NavLi href="/my_refrigerator" size="lg" class="font-PoetsenOne text-lg md:text-xl border-b-2 border-transparent hover:border-lime-900">MY REFRIGERATOR</NavLi>
+    <NavLi href="/food_diary" size="lg" class="font-PoetsenOne text-lg md:text-xl border-b-2 border-transparent hover:border-lime-900">FOOD DIARY</NavLi>
+    <NavLi href="/receipe" size="lg" class="font-PoetsenOne text-lg md:text-xl border-b-2 border-transparent hover:border-lime-900">RECEIPE</NavLi>
   </NavUl>
 </Navbar>
 
-<div class="min-h-screen bg-neutral-50">
+<div class="min-h-screen bg-orange-50[.6]">
   <div class="p-2 sm:p-4">
       <div class="flex flex-col">
           <slot></slot>
