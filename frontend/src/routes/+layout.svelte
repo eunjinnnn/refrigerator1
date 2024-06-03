@@ -4,6 +4,97 @@
   $: activeUrl = $page.url.pathname;
   let activeClass = 'text-white bg-lime-950 md:bg-transparent md:text-green-700 md:dark:text-white dark:bg-green-600 md:dark:bg-transparent';
   let nonActiveClass = 'text-lime-950 hover:bg-stone-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent';
+</script>
+
+<Navbar class="bg-orange-50">
+  <NavBrand href="/">
+    <span class="font-PoetsenOne text-lime-800 whitespace-nowrap text-2xl md:text-3xl font-extrabold">FreshKeep</span>
+  </NavBrand>
+  <NavHamburger />
+  <NavUl {activeUrl} {activeClass} {nonActiveClass} color='bg-orange-50'>
+    <NavLi href="/my_refrigerator" size="lg" class="font-PoetsenOne text-lg md:text-xl border-b-2 border-transparent hover:border-lime-800">MY REFRIGERATOR</NavLi>
+    <NavLi href="/food_diary" size="lg" class="font-PoetsenOne text-lg md:text-xl border-b-2 border-transparent hover:border-lime-800">FOOD DIARY</NavLi>
+    <NavLi href="/receipe" size="lg" class="font-PoetsenOne text-lg md:text-xl border-b-2 border-transparent hover:border-lime-800">RECEIPE</NavLi>
+  </NavUl>
+</Navbar>
+
+<div class="min-h-screen bg-neutral-50">
+  <div class="p-2 sm:p-4">
+      <div class="flex flex-col">
+          <slot></slot>
+      </div>
+  </div>
+</div>
+
+
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+  .min-h-screen {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .bg-orange-50 {
+    background-color: #FFFAF0;
+  }
+
+  @media (max-width: 768px) {
+    .py-2 {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    .sm\:py-4 {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    .px-2 {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+
+    .sm\:px-6 {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .py-2 {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    .sm\:py-4 {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+
+    .px-2 {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    .sm\:px-6 {
+      padding-left: 6rem;
+      padding-right: 6rem;
+    }
+  }
+</style>
+
+<!-- <script>
+  import { page } from '$app/stores';
+  import { Navbar, NavBrand, NavLi, NavUl, NavHamburger } from 'flowbite-svelte';
+  $: activeUrl = $page.url.pathname;
+  let activeClass = 'text-white bg-lime-950 md:bg-transparent md:text-green-700 md:dark:text-white dark:bg-green-600 md:dark:bg-transparent';
+  let nonActiveClass = 'text-lime-950 hover:bg-stone-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent';
 
   let categories = [
       { id: 1, name: 'VEGETABLES' },
@@ -96,4 +187,4 @@
           <slot></slot>
       </div>
   </div>
-</div>
+</div> -->
