@@ -8,26 +8,26 @@
 
 <Navbar class="bg-[#faf6ed]/50">
   <NavBrand href="/">
-    <span class="font-PoetsenOne text-lime-900 whitespace-nowrap text-2xl md:text-3xl font-extrabold">FreshKeep</span>
+    <span class="font-PoetsenOne text-lime-950 whitespace-nowrap text-2xl md:text-3xl font-extrabold">FreshKeep</span>
   </NavBrand>
   <NavHamburger />
   <NavUl {activeUrl} {activeClass} {nonActiveClass} color='bg-[#faf6ed]'>
-    <NavLi href="/my_refrigerator" size="lg" class="font-PoetsenOne text-lg md:text-xl border-b-2 border-transparent hover:border-lime-900">MY REFRIGERATOR</NavLi>
-    <NavLi href="/food_diary" size="lg" class="font-PoetsenOne text-lg md:text-xl border-b-2 border-transparent hover:border-lime-900">FOOD DIARY</NavLi>
-    <NavLi href="/receipe" size="lg" class="font-PoetsenOne text-lg md:text-xl border-b-2 border-transparent hover:border-lime-900">RECEIPE</NavLi>
+    <NavLi href="/my_refrigerator" size="lg" class="font-PoetsenOne text-lg md:text-xl border-b-2 border-transparent hover:border-lime-950">MY REFRIGERATOR</NavLi>
+    <NavLi href="/food_diary" size="lg" class="font-PoetsenOne text-lg md:text-xl border-b-2 border-transparent hover:border-lime-950">FOOD DIARY</NavLi>
+    <NavLi href="/receipe" size="lg" class="font-PoetsenOne text-lg md:text-xl border-b-2 border-transparent hover:border-lime-950">RECEIPE</NavLi>
   </NavUl>
 </Navbar>
 
-<div class="min-h-screen bg-orange-50[.6]">
-  <div class="p-2 sm:p-4">
-      <div class="flex flex-col">
+<div class="min-h-full bg-orange-50[.6]">
+  <div class="min-h-80 p-2 sm:p-4">
+      <div class="flex flex-col ">
           <slot></slot>
       </div>
   </div>
 </div>
 
 
-<style>
+<!-- <style>
   body, html {
     margin: 0;
     padding: 0;
@@ -40,9 +40,6 @@
     min-height: 100vh;
   }
 
-  .bg-orange-50 {
-    background-color: #FFFAF0;
-  }
 
   @media (max-width: 768px) {
     .py-2 {
@@ -87,7 +84,7 @@
       padding-right: 6rem;
     }
   }
-</style>
+</style> -->
 
 <!-- <script>
   import { page } from '$app/stores';

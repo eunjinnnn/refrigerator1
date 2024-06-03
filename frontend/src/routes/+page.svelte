@@ -139,7 +139,7 @@
 {#each categories as category}
     <div class='bg-orange-50[.6] flex flex-col mb-2 overflow-hidden'>
         <div class="flex justify-between items-center px-4 py-2">
-            <p class="font-PoetsenOne text-lg font-bold text-lime-900"># {category.name}</p>
+            <p class="font-PoetsenOne text-lg font-bold text-lime-950"># {category.name}</p>
             <div>
                 <a href="#" on:click|preventDefault={toggleFormVisibility} class="font-serif text-lime-950 text-sm font-medium text-primary-600"> + </a>
             </div>
