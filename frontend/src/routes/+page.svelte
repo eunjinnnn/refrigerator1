@@ -151,8 +151,8 @@
                     <button on:click={() => showFoodDetails(food)} class="cursor-pointer w-full relative bg-white border-1 border-lime-950 rounded-lg focus:outline-none">
                         <Card class="relative border-1 border-lime-950 rounded-lg">
                             <div class="flex flex-col justify-center items-center">
-                                <p class="font-PoetsenOne text-lg text-lime-950 font-semibold whitespace-nowrap">{food.foodname} {food.volume}{food.unit}</p>
-                                <p class="{isExpired(food.expiration_date) ? 'text-red-500' : 'text-lime-950'} text-sm font-PoetsenOne">{food.expiration_date}</p>
+                                <p class="font-PoetsenOne text-sm text-lime-950 font-semibold whitespace-nowrap">{food.foodname} {food.volume}{food.unit}</p>
+                                <p class="{isExpired(food.expiration_date) ? 'text-red-500' : 'text-lime-950'} text-xs font-PoetsenOne">{food.expiration_date}</p>
                             </div>
                         </Card>
                     </button>
