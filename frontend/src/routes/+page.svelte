@@ -137,11 +137,11 @@
 
 
 {#each categories as category}
-    <div class='bg-orange-50[.6] flex flex-col mb-2 overflow-hidden'>
+    <div class='bg-orange-50/60 flex flex-col mb-2 overflow-hidden'>
         <div class="flex justify-between items-center px-4 py-2">
-            <div class = 'flex justify-between items-center'>
-                <img src={category.img_url} class="h-8 sm:h-10" alt="ICON" />
-                <p class="font-PoetsenOne text-lg font-bold text-lime-950"> {category.name}</p>
+            <div class='flex items-center'>
+                <img src='/images/hashtag_icon.png' class="h-6 sm:h-5" alt="ICON" />
+                <p class="font-PoetsenOne text-lg font-bold text-lime-950 ml-2"> {category.name}</p>
             </div>
             <div>
                 <a href="#" on:click|preventDefault={toggleFormVisibility} class="font-serif text-lime-950 text-sm font-medium text-primary-600"> + </a>
@@ -164,6 +164,7 @@
         </div>
     </div>
 {/each}
+
 
 {#if selectedFood}
     <ModalDetail food={selectedFood} close={closeFoodDetails} {deleteFood} {showEditForm}/>
