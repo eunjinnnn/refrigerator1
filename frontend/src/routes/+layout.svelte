@@ -6,9 +6,9 @@
   let nonActiveClass = 'text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent';
 </script>
 
-<Navbar class="bg-orange-50/60 flex items-center justify-between px-4 py-2 shadow-md border-b border-gray-300">
+<Navbar class="fixed top-0 left-0 w-full z-50 bg-orange-50/60 flex items-center justify-between px-4 py-2 shadow-md border-b border-gray-300">
   <NavBrand href="/">
-    <img src="/images/FRESHKEEP.png" class="h-8 sm:h-10" alt="FreshKeep Logo" />
+    <img src="/images/FRESHKEEP.png" class="h-8 sm:h-6 md:h-4 lg:h-3 xl:h-2 mt-2 max-w-full" alt="FreshKeep Logo" />
   </NavBrand>
   <NavHamburger />
   <NavUl {activeUrl} {activeClass} {nonActiveClass} class="flex items-center space-x-4">

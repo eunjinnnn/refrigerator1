@@ -4,7 +4,7 @@
 
     let categories = [
         { id: 1, name: 'VEGETABLES', img_url: '/images/vegetable_icon.png'},
-        { id: 2, name: 'DRINKS', img_url: '/images/drinks_icon.png'},
+        { id: 2, name: 'DRINKS', img_url: '/images/water_bottle_icon.png'},
         { id: 3, name: 'FROZEN FOOD', img_url: '/images/frozen_food_icon.png'},
         { id: 4, name: 'ETC', img_url: '/images/etc_icon.png'}
     ];
@@ -133,37 +133,42 @@
         width: 80%;
         max-width: 500px;
     }
+    body {
+    overflow-x: hidden; /* Prevent horizontal scroll */
+  }
 </style>
 
 
-{#each categories as category}
-    <div class='bg-orange-50/60 flex flex-col mb-2 overflow-hidden'>
-        <div class="flex justify-between items-center px-4 py-2">
-            <div class='flex items-center'>
-                <img src='/images/hashtag_icon.png' class="h-6 sm:h-5" alt="ICON" />
-                <p class="font-PoetsenOne text-lg font-bold text-lime-950 ml-2"> {category.name}</p>
-            </div>
-            <div>
-                <a href="#" on:click|preventDefault={toggleFormVisibility} class="font-serif text-lime-950 text-sm font-medium text-primary-600"> + </a>
-            </div>
-        </div>
-        <div class="border-b border-lime-950 border-opacity-30"></div>
-        <div class="flex flex-wrap mt-2">
-            {#each filteredItems(category.id) as food}
-                <div class="w-1/3 p-1">
-                    <button on:click={() => showFoodDetails(food)} class="cursor-pointer w-full relative bg-white border-1 border-lime-950 rounded-lg focus:outline-none">
-                        <Card class="relative border-1 border-lime-950 rounded-lg">
-                            <div class="flex flex-col justify-center items-center">
-                                <p class="font-PoetsenOne text-sm text-lime-950 font-semibold whitespace-nowrap">{food.foodname} {food.volume}{food.unit}</p>
-                                <p class="{isExpired(food.expiration_date) ? 'text-red-500' : 'text-lime-950'} text-xs font-PoetsenOne">{food.expiration_date}</p>
-                            </div>
-                        </Card>
-                    </button>
+<div class="mt-16 px-3">
+    {#each categories as category}
+        <div class='bg-neutral-50/70 flex flex-col mb-5 overflow-hidden border rounded-xl shadow-md'>
+            <div class="flex justify-center items-center px-4 py-4">
+                <div class='flex items-center'>
+                    <img src={category.img_url} class="h-6 sm:h-5" alt="ICON" />
+                    <p class="font-PoetsenOne text-lg font-bold text-lime-950 ml-2"> {category.name}</p>
                 </div>
-            {/each}
+                <!-- <div>
+                    <a href="#" on:click|preventDefault={toggleFormVisibility} class="font-serif text-lime-950 text-sm font-medium text-primary-600"> + </a>
+                </div> -->
+            </div>
+            <div class="mx-4 border-b border-lime-950 border-opacity-30"></div>
+            <div class="flex flex-wrap mx-4 my-2">
+                {#each filteredItems(category.id) as food}
+                    <div class="w-1/3 p-1">
+                        <button on:click={() => showFoodDetails(food)} class="cursor-pointer w-full relative bg-white border-1 border-lime-950 rounded-lg focus:outline-none">
+                            <Card class="relative border-1 border-lime-950 rounded-lg">
+                                <div class="flex flex-col justify-center items-center">
+                                    <p class="font-PoetsenOne text-sm text-lime-950 font-semibold whitespace-nowrap sm: text-xs sm: text-pretty">{food.foodname} {food.volume}{food.unit}</p>
+                                    <p class="{isExpired(food.expiration_date) ? 'text-red-500' : 'text-lime-950'} text-xs font-PoetsenOne sm: text-xxs">{food.expiration_date}</p>
+                                </div>
+                            </Card>
+                        </button>
+                    </div>
+                {/each}
+            </div>
         </div>
-    </div>
-{/each}
+    {/each}
+  </div>
 
 
 {#if selectedFood}
