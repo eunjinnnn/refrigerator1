@@ -3,10 +3,10 @@
     import ModalDetail from './modal_detail.svelte';
 
     let categories = [
-        { id: 1, name: 'VEGETABLES' },
-        { id: 2, name: 'DRINKS' },
-        { id: 3, name: 'FROZEN FOOD' },
-        { id: 4, name: 'ETC' }
+        { id: 1, name: 'VEGETABLES', img_url: '/images/vegetable_icon.png'},
+        { id: 2, name: 'DRINKS', img_url: '/images/drinks_icon.png'},
+        { id: 3, name: 'FROZEN FOOD', img_url: '/images/frozen_food_icon.png'},
+        { id: 4, name: 'ETC', img_url: '/images/etc_icon.png'}
     ];
 
     let item_list = [
@@ -139,7 +139,10 @@
 {#each categories as category}
     <div class='bg-orange-50[.6] flex flex-col mb-2 overflow-hidden'>
         <div class="flex justify-between items-center px-4 py-2">
-            <p class="font-PoetsenOne text-lg font-bold text-lime-950"># {category.name}</p>
+            <div class = 'flex justify-between items-center'>
+                <img src={category.img_url} class="h-8 sm:h-10" alt="ICON" />
+                <p class="font-PoetsenOne text-lg font-bold text-lime-950"> {category.name}</p>
+            </div>
             <div>
                 <a href="#" on:click|preventDefault={toggleFormVisibility} class="font-serif text-lime-950 text-sm font-medium text-primary-600"> + </a>
             </div>

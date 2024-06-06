@@ -28,6 +28,10 @@ const config = {
       fontFamily: {
         PoetsenOne: ['PoetsenOne', 'sans-serif'],
         opensans: ['Open Sans', 'sans-serif'],
+      },
+      fontFamily: {
+        PoetsenOne: ['PoetsenOne', 'sans-serif'],
+        opensans: ['Open Sans', 'sans-serif'],
       }
     }
   }
