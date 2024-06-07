@@ -1,19 +1,18 @@
 <script>
-    let data = "receipe";
+    import { onMount } from 'svelte';
     import { fetchData } from "$lib/fetchData.js";
 
     let categories = [];
 
-    fetchData("foods/categories", "GET")
-        .then(response => {
+    onMount(async () => {
+        try {
+            const response = await fetchData("foods/categories", "GET");
             categories = response;
-        })
-        .catch(error => {
+        } catch (error) {
             console.error("Error fetching categories:", error);
-        });
+        }
+    });
 </script>
-
-<b>{data}</b>
 
 <div class="mt-16 px-3">
     {#if categories.length === 0}
@@ -21,6 +20,7 @@
     {:else}
         {#each categories as category}
             <div>
+                <img src={category.img_url} class="h-6 sm:h-5" alt="ICON" />
                 <b>{category.name}</b>
             </div>
         {/each}
