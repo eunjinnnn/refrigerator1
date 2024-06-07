@@ -10,14 +10,14 @@
         "model": "foods.foodunit",
         "pk": 2,
         "fields": {
-            "name": "조각"
+            "name": "L"
         }
     },
     {
         "model": "foods.foodunit",
         "pk": 3,
         "fields": {
-            "name": "L"
+            "name": "조각"
         }
     },
     {
@@ -40,7 +40,7 @@
         "model": "foods.category",
         "pk": 3,
         "fields": {
-            "name": "FROZEN_FOODS",
+            "name": "FROZEN FOOD",
             "img_url": "images/frozen_food_icon.png"
         }
     },
@@ -50,6 +50,102 @@
         "fields": {
             "name": "ETC",
             "img_url": "images/etc_icon.png"
+        }
+    },
+    {
+        "model": "foods.fooditem",
+        "pk": 1,
+        "fields": {
+            "category": 1,
+            "foodname": "양파",
+            "volume": 5,
+            "unit": 1,
+            "expiration_date": "2024-05-24",
+            "purchase_date": "2024-05-20"
+        }
+    },
+    {
+        "model": "foods.fooditem",
+        "pk": 2,
+        "fields": {
+            "category": 1,
+            "foodname": "대파",
+            "volume": 5,
+            "unit": 1,
+            "expiration_date": "2024-05-23",
+            "purchase_date": "2024-05-20"
+        }
+    },
+    {
+        "model": "foods.fooditem",
+        "pk": 3,
+        "fields": {
+            "category": 1,
+            "foodname": "당근",
+            "volume": 5,
+            "unit": 1,
+            "expiration_date": "2024-05-05",
+            "purchase_date": "2024-05-20"
+        }
+    },
+    {
+        "model": "foods.fooditem",
+        "pk": 4,
+        "fields": {
+            "category": 1,
+            "foodname": "양배추",
+            "volume": 5,
+            "unit": 1,
+            "expiration_date": "2024-05-07",
+            "purchase_date": "2024-05-20"
+        }
+    },
+    {
+        "model": "foods.fooditem",
+        "pk": 5,
+        "fields": {
+            "category": 2,
+            "foodname": "사이다",
+            "volume": 2,
+            "unit": 2,
+            "expiration_date": "2024-05-28",
+            "purchase_date": "2024-05-20"
+        }
+    },
+    {
+        "model": "foods.fooditem",
+        "pk": 6,
+        "fields": {
+            "category": 2,
+            "foodname": "콜라",
+            "volume": 2,
+            "unit": 2,
+            "expiration_date": "2024-05-06",
+            "purchase_date": "2024-05-20"
+        }
+    },
+    {
+        "model": "foods.fooditem",
+        "pk": 7,
+        "fields": {
+            "category": 3,
+            "foodname": "만두",
+            "volume": 2,
+            "unit": 1,
+            "expiration_date": "2024-05-06",
+            "purchase_date": "2024-05-20"
+        }
+    },
+    {
+        "model": "foods.fooditem",
+        "pk": 8,
+        "fields": {
+            "category": 4,
+            "foodname": "다진마늘",
+            "volume": 10,
+            "unit": 3,
+            "expiration_date": "2025-05-06",
+            "purchase_date": "2024-05-20"
         }
     }
 ]

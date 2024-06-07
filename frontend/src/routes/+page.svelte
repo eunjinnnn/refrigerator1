@@ -1,30 +1,45 @@
 <script>
     import { Card, Input, Label, Button, Select } from 'flowbite-svelte';
     import ModalDetail from './modal_detail.svelte';
+    import { onMount } from 'svelte';
+    import { fetchData } from "$lib/fetchData.js";
 
-    let categories = [
-        { id: 1, name: 'VEGETABLES', img_url: '/images/vegetable_icon.png'},
-        { id: 2, name: 'DRINKS', img_url: '/images/water_bottle_icon.png'},
-        { id: 3, name: 'FROZEN FOOD', img_url: '/images/frozen_food_icon.png'},
-        { id: 4, name: 'ETC', img_url: '/images/etc_icon.png'}
-    ];
+    let categories = [];
+    let foodItems = [];
+    let units = [];
+    let isLoading = true;
+    let error = null;
 
-    let item_list = [
-        { category: 1, foodname: '양파', volume: '5', unit: '개', expiration_date: '2024-05-24', purchase_date: '2024-05-20' },
-        { category: 1, foodname: '대파', volume: '5', unit: '개', expiration_date: '2024-05-23',  purchase_date: '2024-05-20' },
-        { category: 1, foodname: '당근', volume: '5', unit: '개', expiration_date: '2024-05-05', purchase_date: '2024-05-20' },
-        { category: 1, foodname: '양배추', volume: '5', unit: '개', expiration_date: '2024-05-07', purchase_date: '2024-05-20' },
-        { category: 2, foodname: '사이다', volume: '2', unit: 'L', expiration_date: '2024-05-28', purchase_date: '2024-05-20' },
-        { category: 2, foodname: '콜라', volume: '2', unit: 'L', expiration_date: '2024-05-06', purchase_date: '2024-05-20' },
-        { category: 3, foodname: '만두', volume: '2', unit: '개', expiration_date: '2024-05-06', purchase_date: '2024-05-20' },
-        { category: 4, foodname: '다진마늘', volume: '10', unit: '조각', expiration_date: '2025-05-06', purchase_date: '2024-05-20' },
-    ];
+    onMount(async () => {
+        try {
+            // Fetch categories
+            const categoriesResponse = await fetchData('foods/categories', 'GET');
+            categories = categoriesResponse;
 
-    let units = [
-        { value: 1, name: '개' },
-        { value: 2, name: 'L' },
-        { value: 3, name: '조각' }
-    ];
+            // Fetch food items
+            const foodItemsResponse = await fetchData('foods/fooditems', 'GET');
+            foodItems = foodItemsResponse;
+
+            // Fetch units
+            const unitsResponse = await fetchData('foods/foodunits', 'GET');
+            units = unitsResponse;
+
+            isLoading = false;
+        } catch (err) {
+            error = err;
+            isLoading = false;
+        }
+    });
+
+    function getUnitName(unitId) {
+        const unit = units.find(unit => unit.id === unitId);
+        return unit ? unit.name : '';
+    }
+
+    function getCategoryName(categoryId) {
+        const category = categories.find(cat => cat.id === categoryId);
+        return category ? category.name : 'Unknown';
+    }
 
     let lists = [];
     let cat_selected = '';
@@ -138,38 +153,46 @@
   }
 </style>
 
-
-<div class="mt-16 px-3">
-    {#each categories as category}
-        <div class='bg-neutral-50/70 flex flex-col mb-5 overflow-hidden border rounded-xl shadow-md'>
-            <div class="flex justify-center items-center px-4 py-4">
-                <div class='flex items-center'>
-                    <img src={category.img_url} class="h-6 sm:h-5" alt="ICON" />
-                    <p class="font-PoetsenOne text-lg font-bold text-lime-950 ml-2"> {category.name}</p>
-                </div>
-                <!-- <div>
-                    <a href="#" on:click|preventDefault={toggleFormVisibility} class="font-serif text-lime-950 text-sm font-medium text-primary-600"> + </a>
-                </div> -->
-            </div>
-            <div class="mx-4 border-b border-lime-950 border-opacity-30"></div>
-            <div class="flex flex-wrap mx-4 my-2">
-                {#each filteredItems(category.id) as food}
-                    <div class="w-1/3 p-1">
-                        <button on:click={() => showFoodDetails(food)} class="cursor-pointer w-full relative bg-white border-1 border-lime-950 rounded-lg focus:outline-none">
-                            <Card class="relative border-1 border-lime-950 rounded-lg">
-                                <div class="flex flex-col justify-center items-center">
-                                    <p class="font-PoetsenOne text-sm text-lime-950 font-semibold whitespace-nowrap sm: text-xs sm: text-pretty">{food.foodname} {food.volume}{food.unit}</p>
-                                    <p class="{isExpired(food.expiration_date) ? 'text-red-500' : 'text-lime-950'} text-xs font-PoetsenOne sm: text-xxs">{food.expiration_date}</p>
-                                </div>
-                            </Card>
-                        </button>
+{#if isLoading}
+    <b>Loading...</b>
+{:else if error}
+    <b>Error: {error.message}</b>
+{:else}
+    <div class="mt-16 px-3">
+        {#each categories as category}
+            <div class='bg-neutral-50/70 flex flex-col mb-5 overflow-hidden border rounded-xl shadow-md'>
+                <div class="flex justify-center items-center px-4 py-4">
+                    <div class='flex items-center'>
+                        <img src={category.img_url} class="h-6 sm:h-5" alt="ICON" />
+                        <p class="font-PoetsenOne text-lg font-bold text-lime-950 ml-2"> {category.name}</p>
                     </div>
-                {/each}
+                    <div>
+                        <a href="#" on:click|preventDefault={toggleFormVisibility} class="font-serif text-lime-950 text-sm font-medium text-primary-600"> + </a>
+                    </div>
+                </div>
+                <div class="mx-4 border-b border-lime-950 border-opacity-30"></div>
+                <div class="flex flex-wrap mx-4 my-2">
+                    {#each foodItems.filter(food => food.category_id === category.id) as food}
+                        <div class="w-1/3 p-1">
+                            <button on:click={() => showFoodDetails(food)} class="cursor-pointer w-full relative bg-white border-1 border-lime-950 rounded-lg focus:outline-none">
+                                <Card class="relative border-1 border-lime-950 rounded-lg">
+                                    <div class="flex flex-col justify-center items-center">
+                                        <p class="font-PoetsenOne text-sm text-lime-950 font-semibold whitespace-nowrap sm: text-xs sm: text-pretty">
+                                            {food.foodname} {food.volume} {getUnitName(food.unit_id)}
+                                        </p>
+                                        <p class="{isExpired(food.expiration_date) ? 'text-red-500' : 'text-lime-950'} text-xs font-PoetsenOne sm: text-xxs">
+                                            {food.expiration_date}
+                                        </p>
+                                    </div>
+                                </Card>
+                            </button>
+                        </div>
+                    {/each}
+                </div>
             </div>
-        </div>
-    {/each}
-  </div>
-
+        {/each}
+    </div>
+{/if}
 
 {#if selectedFood}
     <ModalDetail food={selectedFood} close={closeFoodDetails} {deleteFood} {showEditForm}/>
