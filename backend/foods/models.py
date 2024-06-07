@@ -29,21 +29,3 @@ class FoodItem(models.Model):
 
     def __str__(self):
         return self.foodname
-
-# # 초기 데이터 정의
-# initial_units = [
-#     FoodUnit(name='개'),
-#     FoodUnit(name='조각'),
-#     FoodUnit(name='L'),
-# ]
-
-# initial_categories = [
-#     Category(name='VEGETABLES'),
-#     Category(name='DRINKS'),
-#     Category(name='FROZEN_FOODS'),
-#     Category(name='ETC'),
-# ]
-
-# # 초기 데이터를 한 번에 생성
-# FoodUnit.objects.bulk_create(initial_units)
-# Category.objects.bulk_create(initial_categories)
