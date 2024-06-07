@@ -1,0 +1,55 @@
+[
+    {
+        "model": "foods.foodunit",
+        "pk": 1,
+        "fields": {
+            "name": "개"
+        }
+    },
+    {
+        "model": "foods.foodunit",
+        "pk": 2,
+        "fields": {
+            "name": "조각"
+        }
+    },
+    {
+        "model": "foods.foodunit",
+        "pk": 3,
+        "fields": {
+            "name": "L"
+        }
+    },
+    {
+        "model": "foods.category",
+        "pk": 1,
+        "fields": {
+            "name": "VEGETABLES",
+            "img_url": "url_to_image"
+        }
+    },
+    {
+        "model": "foods.category",
+        "pk": 2,
+        "fields": {
+            "name": "DRINKS",
+            "img_url": "url_to_image"
+        }
+    },
+    {
+        "model": "foods.category",
+        "pk": 3,
+        "fields": {
+            "name": "FROZEN_FOODS",
+            "img_url": "url_to_image"
+        }
+    },
+    {
+        "model": "foods.category",
+        "pk": 4,
+        "fields": {
+            "name": "ETC",
+            "img_url": "url_to_image"
+        }
+    }
+]
