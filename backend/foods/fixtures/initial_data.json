@@ -25,7 +25,7 @@
         "pk": 1,
         "fields": {
             "name": "VEGETABLES",
-            "img_url": "images/vegetables_icon.png"
+            "img_url": "images/frozen_food_icon.png"
         }
     },
     {

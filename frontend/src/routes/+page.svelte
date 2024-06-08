@@ -52,18 +52,6 @@
     // 모달 상태 변수
     let isFormVisible = false;
 
-
-
-    let lists = [];
-    // let cat_selected = '';
-    // let unit_selected = '';
-    // let volume = '';
-    // let foodname = '';
-    // let purchaseDate = '';
-    // let expirationDate = '';
-    // let isFormVisible = false;
-    // let isEditVisible = false
-
     // function filteredItems(categoryId) {
     //     return item_list.filter(item => item.category === categoryId).sort((a, b) => {
     //         return new Date(a.expiration_date) - new Date(b.expiration_date);
@@ -114,9 +102,6 @@
             console.error('Error adding item:', err);
         }
 }
-
-
-
 
     let selectedFood = null; // 선택된 식품 정보를 저장하는 writable store
     let isAddVisible = false;
@@ -226,7 +211,7 @@
 {/if}
 
 {#if selectedFood}
-    <ModalDetail food={selectedFood} close={closeFoodDetails} {deleteFood} {showEditForm}/>
+    <ModalDetail food={selectedFood} close={closeFoodDetails} {deleteFood} {showEditForm} {categories} {units}/>
 {/if}
 
 <!-- {#if isEditVisible}
