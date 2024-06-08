@@ -41,55 +41,86 @@
         return category ? category.name : 'Unknown';
     }
 
-    let lists = [];
+    // 폼 데이터 상태 변수
     let cat_selected = '';
-    let unit_selected = '';
-    let volume = '';
     let foodname = '';
-    let purchaseDate = '';
+    let volume = '';
+    let unit_selected = '';
     let expirationDate = '';
+    let purchaseDate = '';
+
+    // 모달 상태 변수
     let isFormVisible = false;
-    let selectedFood = null; // 선택된 식품 정보를 저장하는 writable store
-    let isAddVisible = false;
+
+
+
+    let lists = [];
+    // let cat_selected = '';
+    // let unit_selected = '';
+    // let volume = '';
+    // let foodname = '';
+    // let purchaseDate = '';
+    // let expirationDate = '';
+    // let isFormVisible = false;
     // let isEditVisible = false
 
-    function filteredItems(categoryId) {
-        return item_list.filter(item => item.category === categoryId).sort((a, b) => {
-            return new Date(a.expiration_date) - new Date(b.expiration_date);
-        });
-    }
+    // function filteredItems(categoryId) {
+    //     return item_list.filter(item => item.category === categoryId).sort((a, b) => {
+    //         return new Date(a.expiration_date) - new Date(b.expiration_date);
+    //     });
+    // }
 
+    // ADD FOOD 관련 함수 
+    // 유통기한 지난 날짜 빨간색으로 표시
     function isExpired(expiration_date) {
         return new Date(expiration_date) < new Date();
     }
 
+    // 버튼 누르면 ADD FORM MODAL 띄우기
     function toggleFormVisibility() {
         isFormVisible = !isFormVisible;
     }
 
-    function addItem(event) {
+    // ADD FORM에서 SUBMIT 버튼 누르면 실행
+    async function addItem(event) {
         event.preventDefault();
-        const selectedCategory = categories.find(cat => cat.value == cat_selected)?.name || '';
-        const selectedUnit = units.find(unit => unit.value == unit_selected)?.name || '';
+        try {
+            const newItem = {
+                category_id: parseInt(cat_selected) || 0,
+                foodname: foodname,
+                volume: parseInt(volume) || 0,
+                unit_id: parseInt(unit_selected) || 0,
+                expiration_date: expirationDate,
+                purchase_date: purchaseDate
+            };
 
-        lists.push({
-            foodname,
-            volume,
-            unit: selectedUnit,
-            category: selectedCategory,
-            purchaseDate,
-            expirationDate
-        });
+            // 데이터가 올바르게 포맷되었는지 콘솔에 출력하여 확인
+            console.log("newItem:", JSON.stringify(newItem, null, 2));
 
-        foodname = '';
-        volume = '';
-        unit_selected = '';
-        cat_selected = '';
-        purchaseDate = '';
-        expirationDate = '';
-        toggleFormVisibility();
-    }
+            const response = await fetchData('foods/fooditems', 'POST', newItem);
 
+            // 성공적으로 저장된 경우 foodItems 배열에 추가
+            foodItems = [...foodItems, response]; // 새로운 배열을 할당
+
+            // 폼 초기화 및 모달 닫기
+            cat_selected = '';
+            foodname = '';
+            volume = '';
+            unit_selected = '';
+            expirationDate = '';
+            purchaseDate = '';
+            toggleFormVisibility();
+        } catch (err) {
+            console.error('Error adding item:', err);
+        }
+}
+
+
+
+
+    let selectedFood = null; // 선택된 식품 정보를 저장하는 writable store
+    let isAddVisible = false;
+    
     function showFoodDetails(food) {
         selectedFood = food; // 선택된 식품 정보를 설정
     }
@@ -239,19 +270,19 @@
                     <label for="unit" class="flex font-PoetsenOne">Unit</label>
                     <select id="unit" bind:value={unit_selected} style='border-radius: 8px;' class="flex font-PoetsenOne mt-1">
                         {#each units as unit}
-                            <option value={unit.value}>{unit.name}</option>
+                            <option value={unit.id}>{unit.name}</option>
                         {/each}
                     </select>
                 </div>
             </div>
             <div class="flex flex-wrap -mx-2">
                 <div class="flex flex-col w-1/2 p-2">
-                    <label for="expiration_date" class="font-PoetsenOne">Expiration Date</label>
-                    <input type="date" id="expiration_date" bind:value={purchaseDate} style='border-radius: 8px; margin-top:2px' class="w-full p-2"/>
+                    <label for="purchase_date" class="font-PoetsenOne">Purchase Date</label>
+                    <input type="date" id="purchase_date" bind:value={purchaseDate} style='border-radius: 8px; margin-top:2px' class="w-full p-2"/>
                 </div>
                 <div class="flex flex-col w-1/2 p-2">
-                    <label for="purchase_date" class="font-PoetsenOne">Purchase Date</label>
-                    <input type="date" id="purchase_date" bind:value={expirationDate} style='border-radius: 8px; margin-top:2px' class="w-full p-2"/>
+                    <label for="expiration_date" class="font-PoetsenOne">Expiration Date</label>
+                    <input type="date" id="expiration_date" bind:value={expirationDate} style='border-radius: 8px; margin-top:2px' class="w-full p-2"/>
                 </div>
             </div>
             <div class='flex justify-end mt-2'>

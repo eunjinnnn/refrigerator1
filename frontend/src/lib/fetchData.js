@@ -33,3 +33,4 @@ export async function fetchData(uri, method = 'GET', data = {}) {
     const response = await fetch(url, options);
     return await response.json();
 }
+

@@ -57,8 +57,8 @@
 
         <div class="border-b border-lime-950 border-opacity-30 mb-2"></div>
         <p class='font-PoetsenOne'><strong>Category:</strong> {getCategoryName(food.category)}</p>
-        <p class='font-PoetsenOne'><strong>Expiration Date:</strong> {food.expiration_date}</p>
         <p class='font-PoetsenOne'><strong>Purchase Date:</strong> {food.purchase_date}</p>
+        <p class='font-PoetsenOne'><strong>Expiration Date:</strong> {food.expiration_date}</p>
         <div class='flex justify-between mt-2'>
             <Button type="button" on:click={() => deleteFood(food)} class="flex font-PoetsenOne text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size='xs'>DELETE</Button>
             <Button type="button" on:click={openEditModal} class="flex font-PoetsenOne text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size='xs'>EDIT</Button>
