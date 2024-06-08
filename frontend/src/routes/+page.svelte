@@ -18,6 +18,7 @@
 
             // Fetch food items
             const foodItemsResponse = await fetchData('foods/fooditems', 'GET');
+            console.log('Fetched food items:', foodItemsResponse); 
             foodItems = foodItemsResponse;
 
             // Fetch units
@@ -107,6 +108,7 @@
     let isAddVisible = false;
     
     function showFoodDetails(food) {
+        console.log('Showing food details:', food.id);
         selectedFood = food; // 선택된 식품 정보를 설정
     }
 
@@ -114,9 +116,19 @@
         selectedFood = null; // 선택된 식품 정보를 null로 설정하여 모달 닫기
     }
 
-    function deleteFood(food) {
-        item_list = item_list.filter(item => item !== food);
-        closeFoodDetails(); // Close the modal after deletion
+    async function deleteFood(food) {
+        try {
+            const response = await fetchData(`foods/fooditems/${food.id}`, 'DELETE');
+            if (response === null) {
+                // 204 응답인 경우, response는 null입니다.
+                foodItems = foodItems.filter(item => item.id !== food.id);
+                closeFoodDetails();
+            } else {
+                console.error('Failed to delete food item');
+            }
+        } catch (err) {
+            console.error('Error deleting item:', err);
+        }
     }
 
     function showEditForm(food) {

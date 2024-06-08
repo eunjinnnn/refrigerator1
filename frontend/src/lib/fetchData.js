@@ -31,6 +31,11 @@ export async function fetchData(uri, method = 'GET', data = {}) {
             throw new Error('Unsupported HTTP method');
     }
     const response = await fetch(url, options);
+
+    // DELETE 요청의 경우 응답 본문이 없을 수 있으므로 이를 처리
+    if (method === 'DELETE' && response.status === 204) {
+        return null;
+    }
+
     return await response.json();
 }
-

@@ -12,6 +12,7 @@ class FoodUnitSchema(Schema):
     name: str
 
 class FoodItemSchema(Schema):
+    id: Optional[int]
     category_id: int
     foodname: str
     volume: int
