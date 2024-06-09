@@ -185,13 +185,13 @@
                 <div class="flex flex-wrap mx-4 my-2">
                     {#each foodItems.filter(food => food.category_id === category.id) as food}
                         <div class="w-1/3 p-1">
-                            <button on:click={() => showFoodDetails(food)} class="cursor-pointer w-full relative bg-white border-1 border-lime-950 rounded-lg focus:outline-none">
-                                <Card class="relative border-1 border-lime-950 rounded-lg">
-                                    <div class="flex flex-col justify-center items-center">
-                                        <p class="font-PoetsenOne text-sm text-lime-950 font-semibold whitespace-nowrap sm: text-xs sm: text-pretty">
-                                            {food.foodname} {food.volume} {getUnitName(food.unit_id)}
+                            <button on:click={() => showFoodDetails(food)} class="cursor-pointer w-full relative bg-white border-1 border-lime-950 rounded-lg focus:outline-none h-full">
+                                <Card class="relative border-1 border-lime-950 rounded-lg h-full flex items-center justify-center">
+                                    <div class="flex flex-col justify-center items-center text-center p-2">
+                                        <p class="font-PoetsenOne text-sm text-lime-950 font-semibold sm:text-xs sm:text-pretty">
+                                            {food.foodname} <span class="whitespace-nowrap">{food.volume}{getUnitName(food.unit_id)}</span>
                                         </p>
-                                        <p class="{isExpired(food.expiration_date) ? 'text-red-500' : 'text-lime-950'} text-xs font-PoetsenOne sm: text-xxs">
+                                        <p class="{isExpired(food.expiration_date) ? 'text-red-500' : 'text-lime-950'} text-xs font-PoetsenOne whitespace-nowrap sm:text-xxs">
                                             {food.expiration_date}
                                         </p>
                                     </div>
