@@ -3,7 +3,7 @@
     export let food;
     export let close;
     export let deleteFood;
-    export let editFood;
+    export let showEditForm;
     export let categories; // 카테고리 리스트
     export let units; // 단위 리스트
 
@@ -42,13 +42,13 @@
         <p class='font-PoetsenOne'><strong>Expiration Date:</strong> {food.expiration_date}</p>
         <div class='flex justify-between mt-2'>
             <Button type="button" on:click={() => deleteFood(food)} class="flex font-PoetsenOne text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size='xs'>DELETE</Button>
-            <Button type="button" on:click={openEditModal} class="flex font-PoetsenOne text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size='xs'>EDIT</Button>
+            <Button type="button" on:click={() => showEditForm(food)} class="flex font-PoetsenOne text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size='xs'>EDIT</Button>
         </div>
     </div>
 </div>
 {/if}
 
-{#if showEditModal}
+<!-- {#if showEditModal}
 <div class="modal active">
     <div class="bg-orange-50 rounded-lg p-4 w-1/2 modal-content">
         <div class="flex justify-between items-center mb-2">
@@ -101,7 +101,7 @@
         </form>
     </div>
 </div>
-{/if}
+{/if} -->
 
 <style>
     .modal {

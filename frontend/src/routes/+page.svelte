@@ -1,6 +1,7 @@
 <script>
     import { Card, Input, Label, Button, Select } from 'flowbite-svelte';
     import ModalDetail from './modal_detail.svelte';
+    import ModalEdit from './modal_edit.svelte';
     import { onMount } from 'svelte';
     import { fetchData } from "$lib/fetchData.js";
 
@@ -131,55 +132,37 @@
         }
     }
 
+    let editSelectedFood = '';
+
     function showEditForm(food) {
-        selectedFood = food;
-        cat_selected = categories.find(cat => cat.value == food.category)?.name || '';
-        unit_selected = units.find(unit => unit.value == food.unit)?.name || '';
-        volume = food.volume;
-        foodname = food.foodname;
-        purchaseDate = food.purchase_date;
-        expirationDate = food.expiration_date;
-        isFormVisible = true;
-        console.log(isFormVisible)
+        editSelectedFood = food;
+        closeFoodDetails();
     }
 
-    function addListVisibility() {
-        isAddVisible = !isAddVisible;
+    async function editFood(food) {
+        try {
+            const response = await fetchData(`foods/fooditems/${food.id}`, 'PUT', food);
+            if (response) {
+                const index = foodItems.findIndex(item => item.id === food.id);
+                foodItems[index] = response;
+                closeEditForm();
+            } else {
+                console.error('Failed to update food item');
+            }
+        } catch (err) {
+            console.error('Error updating item:', err);
+        }
     }
+
+    function closeEditForm() {
+        editSelectedFood = '';
+    }
+
+
+
 
 </script>
 
-
-<style>
-    .modal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        visibility: hidden;
-        opacity: 0;
-        /* transition: visibility 0s, opacity 0.5s linear; */
-    }
-    .modal.active {
-        visibility: visible;
-        opacity: 1;
-    }
-    .modal-content {
-        background: white;
-        padding: 20px;
-        border-radius: 8px;
-        width: 80%;
-        max-width: 500px;
-    }
-    body {
-    overflow-x: hidden; /* Prevent horizontal scroll */
-  }
-</style>
 
 {#if isLoading}
     <b>Loading...</b>
@@ -222,13 +205,18 @@
     </div>
 {/if}
 
+
+
 {#if selectedFood}
     <ModalDetail food={selectedFood} close={closeFoodDetails} {deleteFood} {showEditForm} {categories} {units}/>
 {/if}
 
-<!-- {#if isEditVisible}
-    <div>hi</div>
-{/if} -->
+
+
+{#if editSelectedFood}
+    <ModalEdit food={editSelectedFood} close={closeEditForm} {editFood} {categories} {units}/>
+{/if}
+
 <!-- svelte-ignore empty-block -->
 <!-- {#if isAddVisible}
     <div> hi </div>
@@ -289,3 +277,33 @@
     </div>
 </div>
 
+<style>
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        visibility: hidden;
+        opacity: 0;
+        /* transition: visibility 0s, opacity 0.5s linear; */
+    }
+    .modal.active {
+        visibility: visible;
+        opacity: 1;
+    }
+    .modal-content {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 80%;
+        max-width: 500px;
+    }
+    body {
+    overflow-x: hidden; /* Prevent horizontal scroll */
+  }
+</style>
