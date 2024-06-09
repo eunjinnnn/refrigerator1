@@ -185,10 +185,10 @@
                         <button on:click={() => showFoodDetails(food)} class="cursor-pointer w-full relative bg-white border-1 border-lime-950 rounded-lg focus:outline-none h-full">
                             <Card class="relative border-1 border-lime-950 rounded-lg h-full flex items-center justify-center">
                                 <div class="flex flex-col justify-center items-center text-center p-2 sm: p-1">
-                                    <p class="font-PoetsenOne text-lime-950 font-semibold sm: text-xs sm: text-pretty">
+                                    <p class="font-PoetsenOne text-lime-950 font-semibold text-lg sm: text-xs sm: text-pretty">
                                         {food.foodname} <span class="whitespace-nowrap ">{food.volume}{getUnitName(food.unit_id)}</span>
                                     </p>
-                                    <p class="{isExpired(food.expiration_date) ? 'text-red-500' : 'text-lime-950'} text-xs md:text-sm font-PoetsenOne whitespace-nowrap sm:text-xxs">
+                                    <p class="{isExpired(food.expiration_date) ? 'text-red-500' : 'text-lime-950'} text-xs font-PoetsenOne whitespace-nowrap sm:text-xxs">
                                         {food.expiration_date}
                                     </p>
                                 </div>
@@ -236,33 +236,33 @@
 
 <!-- modal -->
 <div class="modal {isFormVisible ? 'active' : ''}">
-    <div class="modal-content relative"> <!-- relative 클래스 추가 -->
+    <div class="modal-content relative">
         <div class="flex justify-between items-center mb-2">
             <h2 class="text-lg text-lime-950 font-PoetsenOne"><strong>Add Food</strong></h2>
             <button on:click={toggleFormVisibility} class="text-lime-950 text-lg flex items-center ">&times;</button>
         </div>
-        
-        <form on:submit|preventDefault={addItem} > <!-- 버튼과 겹치지 않게 margin-top 추가 -->
+        <div class="border-b border-lime-950 border-opacity-30 mb-2"></div>
+        <form on:submit|preventDefault={addItem}>
             <div class='flex flex-wrap -mx-2 p-2'>
-                <label for="category" class="flex font-PoetsenOne">Category</label>
-                <select id="category" bind:value={cat_selected} class="flex w-full p-2 border mt-1" style='border-radius: 8px;' >
+                <label for="category" class="flex font-PoetsenOne" style='font-size: 0.875rem;'>Category</label>
+                <select id="category" bind:value={cat_selected} class="flex w-full p-2 border mt-1" style='border-radius: 8px;'>
                     {#each categories as category}
                         <option value={category.id}>{category.name}</option>
                     {/each}
                 </select>
             </div>
             <div class="flex flex-wrap -mx-2">
-                <div class='flex flex-col w-1/3 p-2'>
-                    <label for="foodname" class="flex font-PoetsenOne">Food Name</label>
-                    <input type="text" bind:value={foodname} class='flex font-PoetsenOne mt-1' style='border-radius: 8px;' id="foodname" placeholder="Foodname" required/>
+                <div class='flex flex-col w-1/3 p-2' style="min-height: 3rem;">
+                    <label for="foodname" class="flex font-PoetsenOne" style="font-size: 0.875rem;">Food Name</label>
+                    <input type="text" bind:value={foodname} class='flex font-PoetsenOne mt-1 h-full' style='border-radius: 8px;' id="foodname" placeholder="Foodname" required/>
                 </div>
-                <div class="flex flex-col w-1/3 p-2">
-                    <label for="volume" class="flex font-PoetsenOne">Volume</label>
-                    <input type="number" id="volume" bind:value={volume} style='border-radius: 8px;' class="flex font-PoetsenOne mt-1"/>
+                <div class="flex flex-col w-1/3 p-2" style="min-height: 3rem;">
+                    <label for="volume" class="flex font-PoetsenOne" style="font-size: 0.875rem;">Volume</label>
+                    <input type="number" id="volume" bind:value={volume} class="flex font-PoetsenOne mt-1 h-full" style='border-radius: 8px;'/>
                 </div>
-                <div class="flex flex-col w-1/3 p-2">
-                    <label for="unit" class="flex font-PoetsenOne">Unit</label>
-                    <select id="unit" bind:value={unit_selected} style='border-radius: 8px;' class="flex font-PoetsenOne mt-1">
+                <div class="flex flex-col w-1/3 p-2" style="min-height: 3rem;">
+                    <label for="unit" class="flex font-PoetsenOne" style="font-size: 0.875rem;">Unit</label>
+                    <select id="unit" bind:value={unit_selected} class="flex font-PoetsenOne mt-1 h-full" style='border-radius: 8px;'>
                         {#each units as unit}
                             <option value={unit.id}>{unit.name}</option>
                         {/each}
@@ -272,11 +272,11 @@
             <div class="flex flex-wrap -mx-2">
                 <div class="flex flex-col w-1/2 p-2">
                     <label for="purchase_date" class="font-PoetsenOne">Purchase Date</label>
-                    <input type="date" id="purchase_date" bind:value={purchaseDate} style='border-radius: 8px; margin-top:2px' class="w-full p-2"/>
+                    <input type="date" id="purchase_date" bind:value={purchaseDate} class="w-full p-2" style='border-radius: 8px; margin-top:2px;'/>
                 </div>
                 <div class="flex flex-col w-1/2 p-2">
                     <label for="expiration_date" class="font-PoetsenOne">Expiration Date</label>
-                    <input type="date" id="expiration_date" bind:value={expirationDate} style='border-radius: 8px; margin-top:2px' class="w-full p-2"/>
+                    <input type="date" id="expiration_date" bind:value={expirationDate} class="w-full p-2" style='border-radius: 8px; margin-top:2px;'/>
                 </div>
             </div>
             <div class='flex justify-end mt-2'>
@@ -285,6 +285,7 @@
         </form>
     </div>
 </div>
+
 
 <style>
     .modal {

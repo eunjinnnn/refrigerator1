@@ -18,17 +18,17 @@
 
 {#if food}
 <div class="modal active">
-    <div class="bg-orange-50 rounded-lg p-4 w-1/2 modal-content">
+    <div class="bg-orange-50 rounded-lg p-4 w-full sm:w-1/2 modal-content">
         <div class="flex justify-between items-center mb-2">
-            <h2 class="text-lg text-lime-950 font-PoetsenOne"><strong>Edit Food</strong></h2>
-            <button on:click={close} class="text-lime-950 text-lg flex items-center ">&times;</button>
+            <h2 class="text-lg sm:text-base text-lime-950 font-PoetsenOne"><strong>Edit Food</strong></h2>
+            <button on:click={close} class="text-lime-950 text-lg sm:text-base flex items-center">&times;</button>
         </div>
 
         <div class="border-b border-lime-950 border-opacity-30 mb-2"></div>
 
         <form on:submit={() => editFood(food)}>
             <div class="flex flex-col mt-2 p-2">
-                <label for="category" class="flex font-PoetsenOne">Category</label>
+                <label for="category" class="flex font-PoetsenOne" style="font-size: 0.875rem;">Category</label>
                 <select id="category" bind:value={food.category_id} class="flex w-full p-2 mt-1 border-opacity-30" style='border-radius: 8px;'>
                     {#each categories as category}
                         <option value={category.id}>{category.name}</option>
@@ -36,31 +36,31 @@
                 </select>
             </div>
             <div class='flex flex-wrap'>
-                <div class='flex flex-col w-1/3 p-2'>
-                    <label for="foodname" class="flex font-PoetsenOne">Food Name</label>
-                    <input type="text" bind:value={food.foodname} class='flex font-PoetsenOne mt-1' style='border-radius: 8px;' id="foodname" placeholder="Foodname" required/>
+                <div class='flex flex-col w-1/3 p-2' style="min-height: 3rem;">
+                    <label for="foodname" class="flex font-PoetsenOne whitespace-nowrap" style="font-size: 0.875rem;">Food Name</label>
+                    <input type="text" bind:value={food.foodname} class='flex font-PoetsenOne mt-1 h-full text-no' style='border-radius: 8px;' id="foodname" placeholder="Foodname" required/>
                 </div>
-                <div class="flex flex-col w-1/3 p-2">
-                    <label for="volume" class="flex font-PoetsenOne">Volume</label>
-                    <input type="number" id="volume" bind:value={food.volume} style='border-radius: 8px;' class="flex font-PoetsenOne mt-1"/>
+                <div class="flex flex-col w-1/3 p-2" style="min-height: 3rem;">
+                    <label for="volume" class="flex font-PoetsenOne" style="font-size: 0.875rem;">Volume</label>
+                    <input type="number" id="volume" bind:value={food.volume} class="flex font-PoetsenOne mt-1 h-full" style='border-radius: 8px;'/>
                 </div>
-                <div class="flex flex-col w-1/3 p-2">
-                    <label for="unit" class="flex font-PoetsenOne">Unit</label>
-                    <select id="unit" bind:value={food.unit_id} style='border-radius: 8px;' class="flex font-PoetsenOne mt-1">
+                <div class="flex flex-col w-1/3 p-2" style="min-height: 3rem;">
+                    <label for="unit" class="flex font-PoetsenOne" style="font-size: 0.875rem;">Unit</label>
+                    <select id="unit" bind:value={food.unit_id} class="flex font-PoetsenOne mt-1 h-full" style='border-radius: 8px;'>
                         {#each units as unit}
                             <option value={unit.id}>{unit.name}</option>
-                    {/each}
+                        {/each}
                     </select>
                 </div>
             </div>
             <div class="flex flex-wrap">
                 <div class="flex flex-col w-1/2 p-2">
                     <label for="expiration_date" class="font-PoetsenOne">Expiration Date</label>
-                    <input type="date" id="expiration_date" bind:value={food.expiration_date} style='border-radius: 8px; margin-top:2px' class="w-full p-2"/>
+                    <input type="date" id="expiration_date" bind:value={food.expiration_date} class="w-full p-2" style='border-radius: 8px; margin-top:2px;'/>
                 </div>
                 <div class="flex flex-col w-1/2 p-2">
                     <label for="purchase_date" class="font-PoetsenOne">Purchase Date</label>
-                    <input type="date" id="purchase_date" bind:value={food.purchase_date} style='border-radius: 8px; margin-top:2px' class="w-full p-2"/>
+                    <input type="date" id="purchase_date" bind:value={food.purchase_date} class="w-full p-2" style='border-radius: 8px; margin-top:2px;'/>
                 </div>
             </div>
             <div class="flex justify-end p-2">
@@ -69,6 +69,7 @@
         </form>
     </div>
 </div>
+
 {/if}
 
 <style>
