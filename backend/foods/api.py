@@ -1,6 +1,6 @@
 from ninja import Router
 from .models import Category, FoodItem, FoodUnit
-from .schemas import CategorySchema, FoodItemSchema, FoodUnitSchema, VolumeUpdateSchema
+from .schemas import CategorySchema, FoodItemSchema, FoodUnitSchema, VolumeUpdateSchema, FoodItemCreateSchema
 from typing import List
 from django.shortcuts import get_object_or_404
 from ninja.errors import HttpError
@@ -24,7 +24,7 @@ def list_fooditems(request):
     return list(FoodItem.objects.all())
 
 @router.post("/fooditems", response=FoodItemSchema)
-def create_fooditem(request, data: FoodItemSchema):
+def create_fooditem(request, data: FoodItemCreateSchema):
     logger.info(f"Received data: {data}")  # 로그 추가
     try:
         category = get_object_or_404(Category, id=data.category_id)

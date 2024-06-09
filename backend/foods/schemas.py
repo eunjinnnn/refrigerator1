@@ -1,4 +1,5 @@
 from ninja import Schema
+from pydantic import BaseModel
 from datetime import date
 from typing import Optional
 
@@ -23,13 +24,14 @@ class FoodItemSchema(Schema):
 class VolumeUpdateSchema(Schema):
     volume_change: int
 
-# class FoodItemCreateSchema(Schema):
-#     category: int
-#     foodname: str
-#     volume: int
-#     unit: int
-#     expiration_date: date
-#     purchase_date: date
+class FoodItemCreateSchema(Schema):
+    category_id: int
+    foodname: str
+    volume: int
+    unit_id: int
+    expiration_date: date
+    purchase_date: date
+    
 
 # class FoodItemUpdateSchema(Schema):
 #     category: int
