@@ -169,40 +169,49 @@
 {:else if error}
     <b>Error: {error.message}</b>
 {:else}
-    <div class="mt-16 px-3">
-        {#each categories as category}
-            <div class='bg-neutral-50/70 flex flex-col mb-5 overflow-hidden border rounded-xl shadow-md'>
-                <div class="flex justify-center items-center px-4 py-4">
-                    <div class='flex items-center'>
-                        <img src={category.img_url} class="h-6 sm:h-5" alt="ICON" />
-                        <p class="font-PoetsenOne text-lg font-bold text-lime-950 ml-2"> {category.name}</p>
-                    </div>
-                    <div>
-                        <a href="#" on:click|preventDefault={toggleFormVisibility} class="font-serif text-lime-950 text-sm font-medium text-primary-600"> + </a>
-                    </div>
-                </div>
-                <div class="mx-4 border-b border-lime-950 border-opacity-30"></div>
-                <div class="flex flex-wrap mx-4 my-2">
-                    {#each foodItems.filter(food => food.category_id === category.id) as food}
-                        <div class="w-1/3 p-1">
-                            <button on:click={() => showFoodDetails(food)} class="cursor-pointer w-full relative bg-white border-1 border-lime-950 rounded-lg focus:outline-none h-full">
-                                <Card class="relative border-1 border-lime-950 rounded-lg h-full flex items-center justify-center">
-                                    <div class="flex flex-col justify-center items-center text-center p-2">
-                                        <p class="font-PoetsenOne text-sm text-lime-950 font-semibold sm:text-xs sm:text-pretty">
-                                            {food.foodname} <span class="whitespace-nowrap">{food.volume}{getUnitName(food.unit_id)}</span>
-                                        </p>
-                                        <p class="{isExpired(food.expiration_date) ? 'text-red-500' : 'text-lime-950'} text-xs font-PoetsenOne whitespace-nowrap sm:text-xxs">
-                                            {food.expiration_date}
-                                        </p>
-                                    </div>
-                                </Card>
-                            </button>
-                        </div>
-                    {/each}
+<div class="mt-16 px-3">
+    {#each categories as category}
+        <div class='bg-neutral-50/70 flex flex-col mb-5 overflow-hidden border rounded-xl shadow-md'>
+            <div class="flex justify-center items-center px-4 py-4">
+                <div class='flex items-center'>
+                    <img src={category.img_url} class="h-6 sm:h-5" alt="ICON" />
+                    <p class="font-PoetsenOne text-xl md:text-lg sm: text-md font-bold text-lime-950 ml-2"> {category.name}</p>
                 </div>
             </div>
-        {/each}
-    </div>
+            <div class="mx-4 border-b border-lime-950 border-opacity-30"></div>
+            <div class="flex flex-wrap mx-4 my-2">
+                {#each foodItems.filter(food => food.category_id === category.id) as food}
+                    <div class="w-1/3 p-1">
+                        <button on:click={() => showFoodDetails(food)} class="cursor-pointer w-full relative bg-white border-1 border-lime-950 rounded-lg focus:outline-none h-full">
+                            <Card class="relative border-1 border-lime-950 rounded-lg h-full flex items-center justify-center">
+                                <div class="flex flex-col justify-center items-center text-center p-2 sm: p-1">
+                                    <p class="font-PoetsenOne text-lime-950 font-semibold sm: text-xs sm: text-pretty">
+                                        {food.foodname} <span class="whitespace-nowrap ">{food.volume}{getUnitName(food.unit_id)}</span>
+                                    </p>
+                                    <p class="{isExpired(food.expiration_date) ? 'text-red-500' : 'text-lime-950'} text-xs md:text-sm font-PoetsenOne whitespace-nowrap sm:text-xxs">
+                                        {food.expiration_date}
+                                    </p>
+                                </div>
+                            </Card>
+                        </button>
+                    </div>
+                {/each}
+                <div class="w-1/3 p-1">
+                    <button on:click={toggleFormVisibility} class="cursor-pointer w-full relative bg-white bg-opacity-50 border-1 border-lime-950 rounded-lg focus:outline-none h-full">
+                        <Card class="relative border-1 border-lime-950 rounded-lg h-full flex items-center justify-center">
+                            <div class="flex flex-col justify-center items-center text-center p-2 sm:p-1">
+                                <p class="font-PoetsenOne text-lime-950 font-semibold text-lg">
+                                    +
+                                </p>
+                            </div>
+                        </Card>
+                    </button>
+                </div>
+            </div>
+        </div>
+    {/each}
+</div>
+
 {/if}
 
 
