@@ -18,11 +18,20 @@
   </NavUl>
 </Navbar>
 
-
-<div class="min-h-full bg-orange-50/60">
+<!-- stone-200 -->
+<div class="min-h-screen bg-cover bg-center" style="background-image: url('/images/bg1.jpg');">
   <div class="min-h-80 p-2 sm:p-4">
       <div class="flex flex-col">
           <slot></slot>
       </div>
   </div>
 </div>
+
+<style>
+  .bg-cover {
+    background-size: cover;
+  }
+  .bg-center {
+    background-position: center;
+  }
+</style>
