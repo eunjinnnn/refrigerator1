@@ -30,78 +30,31 @@
 
 {#if food}
 <div class="modal active">
-    <div class="bg-orange-50 rounded-lg p-4 w-1/2 modal-content">
+    <div class="bg-orange-50 rounded-lg p-4 w-1/2 modal-content" style="background-color: #FFFBF6;">
         <div class="flex justify-between items-center mb-2">
-            <h2 class="text-lg text-lime-950 font-PoetsenOne"><strong>{food.foodname} {food.volume} {getUnitName(food.unit_id)}</strong></h2>
+            <h2 class="text-lg font-grandstander ml-1"><strong>Food Details</strong></h2>
             <button on:click={close} class="text-lime-950 text-lg flex items-center ">&times;</button>
         </div>
+        <div class="border-b border-zinc-950 border-opacity-30 mb-2"></div>
+        <!-- <div class="flex justify-between items-center mb-2">
+            <h2 class="text-lg text-lime-950 font-PoetsenOne"><strong>{food.foodname} {food.volume} {getUnitName(food.unit_id)}</strong></h2>
+            <button on:click={close} class="text-lime-950 text-lg flex items-center ">&times;</button>
+        </div> -->
+        <!-- <div class="border-b border-lime-950 border-opacity-30 mb-2"></div> -->
 
-        <div class="border-b border-lime-950 border-opacity-30 mb-2"></div>
-        <p class='font-PoetsenOne'><strong>Category:</strong> {getCategoryName(food.category_id)}</p>
-        <p class='font-PoetsenOne'><strong>Purchase Date:</strong> {food.purchase_date}</p>
-        <p class='font-PoetsenOne'><strong>Expiration Date:</strong> {food.expiration_date}</p>
-        <div class='flex justify-between mt-2'>
-            <Button type="button" on:click={() => deleteFood(food)} class="flex font-PoetsenOne text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size='xs'>DELETE</Button>
-            <Button type="button" on:click={() => showEditForm(food)} class="flex font-PoetsenOne text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size='xs'>EDIT</Button>
+        <p class='font-grandstander mb-1'>Food Name: <span class='font-PoetsenOne'>{food.foodname}</span></p>
+        <p class='font-grandstander mb-1'>Food volume: <span class='font-PoetsenOne'>{food.volume}{getUnitName(food.unit_id)} </span></p>
+        <p class='font-grandstander mb-1'>Category: <span class='font-PoetsenOne'>{getCategoryName(food.category_id)}</span></p>
+        <p class='font-grandstander mb-1'>Purchase Date: <span class='font-PoetsenOne'>{food.purchase_date}</span></p>
+        <p class='font-grandstander mb-1'>Expiration Date: <span class='font-PoetsenOne'>{food.expiration_date}</span></p>
+        <div class='flex justify-between pt-2'>
+            <Button type="button" on:click={() => deleteFood(food)} class="flex border-[1px] border-zinc-500 text-xxs font-semibold font-PoetsenOne  bg-[#E8C9D5]/50 text-zinc-950 hover:bg-[#E8C9D5]" size='xs'>DELETE</Button>
+            <Button type="button" on:click={() => showEditForm(food)} class="flex border-[1px] border-zinc-500 text-xxs font-semibold font-PoetsenOne  bg-[#E8C9D5]/50 text-zinc-950 hover:bg-[#E8C9D5]" size='xs'>EDIT</Button>
         </div>
     </div>
 </div>
 {/if}
 
-<!-- {#if showEditModal}
-<div class="modal active">
-    <div class="bg-orange-50 rounded-lg p-4 w-1/2 modal-content">
-        <div class="flex justify-between items-center mb-2">
-            <h2 class="text-lg text-lime-950 font-PoetsenOne"><strong>Edit Food</strong></h2>
-            <button on:click={closeEditModal} class="text-lime-950 text-lg flex items-center ">&times;</button>
-        </div>
-
-        <div class="border-b border-lime-950 border-opacity-30 mb-2"></div>
-
-        <form on:submit={editFood}>
-            <div class="flex flex-col mt-2 p-2">
-                <label for="category" class="flex font-PoetsenOne">Category</label>
-                <select id="category" bind:value={food.category_id} class="flex w-full p-2 mt-1 border-opacity-30" style='border-radius: 8px;'>
-                    {#each categories as category}
-                        <option value={category.id}>{category.name}</option>
-                    {/each}
-                </select>
-            </div>
-            <div class='flex flex-wrap'>
-                <div class='flex flex-col w-1/3 p-2'>
-                    <label for="foodname" class="flex font-PoetsenOne">Food Name</label>
-                    <input type="text" bind:value={food.foodname} class='flex font-PoetsenOne mt-1' style='border-radius: 8px;' id="foodname" placeholder="Foodname" required/>
-                </div>
-                <div class="flex flex-col w-1/3 p-2">
-                    <label for="volume" class="flex font-PoetsenOne">Volume</label>
-                    <input type="number" id="volume" bind:value={food.volume} style='border-radius: 8px;' class="flex font-PoetsenOne mt-1"/>
-                </div>
-                <div class="flex flex-col w-1/3 p-2">
-                    <label for="unit" class="flex font-PoetsenOne">Unit</label>
-                    <select id="unit" bind:value={food.unit_id} style='border-radius: 8px;' class="flex font-PoetsenOne mt-1">
-                        {#each units as unit}
-                            <option value={unit.id}>{unit.name}</option>
-                    {/each}
-                    </select>
-                </div>
-            </div>
-            <div class="flex flex-wrap">
-                <div class="flex flex-col w-1/2 p-2">
-                    <label for="expiration_date" class="font-PoetsenOne">Expiration Date</label>
-                    <input type="date" id="expiration_date" bind:value={food.expiration_date} style='border-radius: 8px; margin-top:2px' class="w-full p-2"/>
-                </div>
-                <div class="flex flex-col w-1/2 p-2">
-                    <label for="purchase_date" class="font-PoetsenOne">Purchase Date</label>
-                    <input type="date" id="purchase_date" bind:value={food.purchase_date} style='border-radius: 8px; margin-top:2px' class="w-full p-2"/>
-                </div>
-            </div>
-            <div class="flex justify-end p-2">
-                <Button type="submit" class="flex font-PoetsenOne text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size='xs'>SAVE</Button>
-            </div>
-        </form>
-    </div>
-</div>
-{/if} -->
 
 <style>
     .modal {

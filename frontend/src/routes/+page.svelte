@@ -238,11 +238,11 @@
             <h2 class="text-lg font-grandstander ml-1"><strong>Add Food</strong></h2>
             <button on:click={toggleFormVisibility} class="text-lime-950 text-lg flex items-center ">&times;</button>
         </div>
-        <div class="border-b border-lime-950 border-opacity-30 mb-2"></div>
+        <div class="border-b border-zinc-950 border-opacity-30 mb-2"></div>
         <form on:submit|preventDefault={addItem}>
             <div class='flex flex-wrap -mx-2 p-2'>
                 <label for="category" class="flex font-grandstander" style='font-size: 0.875rem;'>Category</label>
-                <select id="category" bind:value={cat_selected} class="flex w-full p-2 border mt-1" style='border-radius: 8px;'>
+                <select id="category" bind:value={cat_selected} class="flex w-full p-2 border mt-1" style='border-radius: 8px; '>
                     {#each categories as category}
                         <option value={category.id}>{category.name}</option>
                     {/each}
@@ -251,7 +251,7 @@
             <div class="flex flex-wrap -mx-2">
                 <div class='flex flex-col w-1/3 p-2' style="min-height: 3rem;">
                     <label for="foodname" class="flex font-grandstander" style="font-size: 0.875rem;">Food Name</label>
-                    <input type="text" bind:value={foodname} class='flex font-grandstander mt-1 h-full' style='border-radius: 8px;' placeholder="Foodname" required/>
+                    <input type="text" bind:value={foodname} class='flex font-grandstander mt-1 h-full' style='border-radius: 8px;' required/>
                 </div>
                 <div class="flex flex-col w-1/3 p-2" style="min-height: 3rem;">
                     <label for="volume" class="flex font-grandstander" style="font-size: 0.875rem;">Volume</label>
@@ -277,7 +277,7 @@
                 </div>
             </div>
             <div class='flex justify-end mt-2'>
-                <Button type="submit" class="flex border-2 border-zinc-300 text-xxs font-semibold font-PoetsenOne  bg-[#E8C9D5]/50 text-zinc-950 hover:bg-[#E8C9D5]" size='xs'>ADD</Button>
+                <Button type="submit" class="flex border-[1px] border-zinc-500 text-xxs font-semibold font-PoetsenOne  bg-[#E8C9D5]/50 text-zinc-950 hover:bg-[#E8C9D5]" size='xs'>ADD</Button>
             </div>
         </form>
     </div>
