@@ -21,7 +21,7 @@ def list_foodunits(request):
 
 @router.get("/fooditems", response=List[FoodItemSchema])
 def list_fooditems(request):
-    return list(FoodItem.objects.all())
+    return list(FoodItem.objects.all().order_by('expiration_date'))
 
 @router.post("/fooditems", response=FoodItemSchema)
 def create_fooditem(request, data: FoodItemCreateSchema):
