@@ -6,6 +6,7 @@
     import { fetchData } from "$lib/fetchData.js";
 
     let categories = [];
+    let activeCategories = [];
     let foodItems = [];
     let units = [];
     let isLoading = true;
@@ -16,6 +17,7 @@
             // Fetch categories
             const categoriesResponse = await fetchData('foods/categories', 'GET');
             categories = categoriesResponse;
+            activeCategories = categories.filter(category => category.isactive);
 
             // Fetch food items
             const foodItemsResponse = await fetchData('foods/fooditems', 'GET');
@@ -183,7 +185,7 @@
             </button>
         {/each}
     </div> -->
-    {#each categories as category}
+    {#each activeCategories  as category}
         <div class='bg-zinc-50/70 flex flex-col mb-5 overflow-hidden border rounded-xl shadow-md'>
             <div class="flex justify-center items-center px-4 py-4">
                 <div class='flex items-center'>
@@ -191,7 +193,7 @@
                     <p class="font-grandstander text-xl md:text-lg sm: text-md font-bold text-amber-950 ml-2 mt-2"> {category.name}</p>
                 </div>
             </div>
-            <div class="mx-4 border-b border-lime-950 border-opacity-30"></div>
+            <div class="mx-4 border-b border-zinc-950 border-opacity-30"></div>
             <div class="flex flex-wrap mx-4 my-2">
                 {#each foodItems.filter(food => food.category_id === category.id) as food}
                     <div class="w-1/3 p-1 hover:bg-zinc-200 rounded-lg">

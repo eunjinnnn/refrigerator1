@@ -57,7 +57,7 @@ def update_fooditem(request, fooditem_id: int, data: FoodItemSchema):
     return fooditem
 
 @router.put("/categories/{category_id}", response=CategorySchema)
-def update_category(request, category_id: int, data: CategoryUpdateSchema):
+def update_category(request, category_id: int, data: CategorySchema):
     category = get_object_or_404(Category, id=category_id)
     for attr, value in data.dict().items():
         if value is not None:

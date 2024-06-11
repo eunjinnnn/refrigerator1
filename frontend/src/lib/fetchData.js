@@ -1,4 +1,4 @@
-const site_root = "http://10.125.208.187:9525/api/";
+const site_root = "http://10.125.208.187:9526/api/";
 
 /**
  * @param {string} uri
