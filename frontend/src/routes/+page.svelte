@@ -169,19 +169,19 @@
 {:else if error}
     <b>Error: {error.message}</b>
 {:else}
-<div class="mt-16 px-3">
+
     {#each categories as category}
         <div class='bg-zinc-50/70 flex flex-col mb-5 overflow-hidden border rounded-xl shadow-md'>
             <div class="flex justify-center items-center px-4 py-4">
                 <div class='flex items-center'>
                     <img src={category.img_url} class="h-6 sm:h-5" alt="ICON" />
-                    <p class="font-PoetsenOne text-xl md:text-lg sm: text-md font-bold text-lime-950 ml-2"> {category.name}</p>
+                    <p class="font-PoetsenOne text-xl md:text-lg sm: text-md font-bold text-amber-950 ml-2"> {category.name}</p>
                 </div>
             </div>
             <div class="mx-4 border-b border-lime-950 border-opacity-30"></div>
             <div class="flex flex-wrap mx-4 my-2">
                 {#each foodItems.filter(food => food.category_id === category.id) as food}
-                    <div class="w-1/3 p-1">
+                    <div class="w-1/3 p-1 hover:bg-stone-200 rounded-lg">
                         <button on:click={() => showFoodDetails(food)} class="relative border-1 border-opacity-30 border-lime-950 rounded-lg h-full w-full flex items-center justify-center p-2 focus:outline-none h-full">
                             <!-- <Card class="relative border-1 border-lime-950 rounded-lg h-full flex items-center justify-center"> -->
                                 <div class="flex flex-col justify-center items-center text-center sm: p-1">
@@ -196,8 +196,8 @@
                         </button>
                     </div>
                 {/each}
-                <div class="w-1/3 p-1">
-                    <button on:click={toggleFormVisibility} class="cursor-pointer w-full relative bg-white bg-opacity-50 border-1 border-lime-950 rounded-lg focus:outline-none h-full">
+                <div class="w-1/3 p-1 hover:bg-stone-200 rounded-lg">
+                    <button on:click={toggleFormVisibility} class="cursor-pointer w-full relative bg-white border-1 border-lime-950 rounded-lg focus:outline-none h-full  " style="background-color: transparent;">
                         <!-- <Card class="relative border-1 border-lime-950 rounded-lg h-full flex items-center justify-center"> -->
                             <div class="flex flex-col justify-center items-center text-center p-2 sm:p-1">
                                 <p class="font-PoetsenOne text-lime-950 font-semibold text-lg">
@@ -210,10 +210,7 @@
             </div>
         </div>
     {/each}
-</div>
-
 {/if}
-
 
 
 {#if selectedFood}
@@ -236,15 +233,15 @@
 
 <!-- modal -->
 <div class="modal {isFormVisible ? 'active' : ''}">
-    <div class="modal-content relative">
+    <div class="modal-content relative " style="background-color: #FFFBF6;">
         <div class="flex justify-between items-center mb-2">
-            <h2 class="text-lg text-lime-950 font-PoetsenOne"><strong>Add Food</strong></h2>
+            <h2 class="text-lg font-grandstander ml-1"><strong>Add Food</strong></h2>
             <button on:click={toggleFormVisibility} class="text-lime-950 text-lg flex items-center ">&times;</button>
         </div>
         <div class="border-b border-lime-950 border-opacity-30 mb-2"></div>
         <form on:submit|preventDefault={addItem}>
             <div class='flex flex-wrap -mx-2 p-2'>
-                <label for="category" class="flex font-PoetsenOne" style='font-size: 0.875rem;'>Category</label>
+                <label for="category" class="flex font-grandstander" style='font-size: 0.875rem;'>Category</label>
                 <select id="category" bind:value={cat_selected} class="flex w-full p-2 border mt-1" style='border-radius: 8px;'>
                     {#each categories as category}
                         <option value={category.id}>{category.name}</option>
@@ -253,16 +250,16 @@
             </div>
             <div class="flex flex-wrap -mx-2">
                 <div class='flex flex-col w-1/3 p-2' style="min-height: 3rem;">
-                    <label for="foodname" class="flex font-PoetsenOne" style="font-size: 0.875rem;">Food Name</label>
-                    <input type="text" bind:value={foodname} class='flex font-PoetsenOne mt-1 h-full' style='border-radius: 8px;' id="foodname" placeholder="Foodname" required/>
+                    <label for="foodname" class="flex font-grandstander" style="font-size: 0.875rem;">Food Name</label>
+                    <input type="text" bind:value={foodname} class='flex font-grandstander mt-1 h-full' style='border-radius: 8px;' placeholder="Foodname" required/>
                 </div>
                 <div class="flex flex-col w-1/3 p-2" style="min-height: 3rem;">
-                    <label for="volume" class="flex font-PoetsenOne" style="font-size: 0.875rem;">Volume</label>
-                    <input type="number" id="volume" bind:value={volume} class="flex font-PoetsenOne mt-1 h-full" style='border-radius: 8px;'/>
+                    <label for="volume" class="flex font-grandstander" style="font-size: 0.875rem;">Volume</label>
+                    <input type="number" id="volume" bind:value={volume} class="flex font-grandstander mt-1 h-full" style='border-radius: 8px;'/>
                 </div>
                 <div class="flex flex-col w-1/3 p-2" style="min-height: 3rem;">
-                    <label for="unit" class="flex font-PoetsenOne" style="font-size: 0.875rem;">Unit</label>
-                    <select id="unit" bind:value={unit_selected} class="flex font-PoetsenOne mt-1 h-full" style='border-radius: 8px;'>
+                    <label for="unit" class="flex font-grandstander" style="font-size: 0.875rem;">Unit</label>
+                    <select id="unit" bind:value={unit_selected} class="flex font-grandstander mt-1 h-full" style='border-radius: 8px;'>
                         {#each units as unit}
                             <option value={unit.id}>{unit.name}</option>
                         {/each}
@@ -271,16 +268,16 @@
             </div>
             <div class="flex flex-wrap -mx-2">
                 <div class="flex flex-col w-1/2 p-2">
-                    <label for="purchase_date" class="font-PoetsenOne">Purchase Date</label>
-                    <input type="date" id="purchase_date" bind:value={purchaseDate} class="w-full p-2" style='border-radius: 8px; margin-top:2px;'/>
+                    <label for="purchase_date" class="font-grandstander">Purchase Date</label>
+                    <input type="date" id="purchase_date" bind:value={purchaseDate} class="w-full p-2" style='border-radius: 8px; margin-top:2px; font-size: 0.875rem;'/>
                 </div>
                 <div class="flex flex-col w-1/2 p-2">
-                    <label for="expiration_date" class="font-PoetsenOne">Expiration Date</label>
-                    <input type="date" id="expiration_date" bind:value={expirationDate} class="w-full p-2" style='border-radius: 8px; margin-top:2px;'/>
+                    <label for="expiration_date" class="font-grandstander">Expiration Date</label>
+                    <input type="date" id="expiration_date" bind:value={expirationDate} class="w-full p-2" style='border-radius: 8px; margin-top:2px;font-size: 0.875rem;'/>
                 </div>
             </div>
             <div class='flex justify-end mt-2'>
-                <Button type="submit" class="flex text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size='xs'>ADD</Button>
+                <Button type="submit" class="flex border-2 border-zinc-300 text-xxs font-semibold font-PoetsenOne  bg-[#E8C9D5]/50 text-zinc-950 hover:bg-[#E8C9D5]" size='xs'>ADD</Button>
             </div>
         </form>
     </div>

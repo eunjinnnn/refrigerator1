@@ -8,7 +8,8 @@
 
 <Navbar class="fixed top-0 left-0 w-full z-50 bg-orange-50/60 flex items-center justify-between px-4 py-2 shadow-md border-b border-gray-300">
   <NavBrand href="/">
-    <img src="/images/FRESHKEEP.png" class="h-8 sm:h-6 md:h-4 lg:h-3 xl:h-2 mt-2 max-w-full" alt="FreshKeep Logo" />
+    <!-- <img src="/images/FRESHKEEP.png" class="h-8 sm:h-6 md:h-4 lg:h-3 xl:h-2 mt-2 max-w-full" alt="FreshKeep Logo" /> -->
+    <h1 class="text-3xl sm:text-xl font-grandstander font-semibold text-amber-950 mt-2">FRESHKEEP</h1>
   </NavBrand>
   <NavHamburger />
   <NavUl {activeUrl} {activeClass} {nonActiveClass} class="flex items-center space-x-4">
@@ -22,7 +23,9 @@
 <div class="min-h-screen bg-cover bg-center" style="background-image: url('/images/bg1.jpg');">
   <div class="min-h-80 p-2 sm:p-4">
       <div class="flex flex-col">
+        <div class="mt-16 px-3">
           <slot></slot>
+        </div>
       </div>
   </div>
 </div>

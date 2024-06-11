@@ -56,11 +56,11 @@
             <div class="flex flex-wrap">
                 <div class="flex flex-col w-1/2 p-2">
                     <label for="expiration_date" class="font-PoetsenOne">Expiration Date</label>
-                    <input type="date" id="expiration_date" bind:value={food.expiration_date} class="w-full p-2" style='border-radius: 8px; margin-top:2px;'/>
+                    <input type="date" id="expiration_date" bind:value={food.expiration_date} class="w-full p-2" style='border-radius: 8px; margin-top:2px; font-size: 0.875rem;'/>
                 </div>
                 <div class="flex flex-col w-1/2 p-2">
                     <label for="purchase_date" class="font-PoetsenOne">Purchase Date</label>
-                    <input type="date" id="purchase_date" bind:value={food.purchase_date} class="w-full p-2" style='border-radius: 8px; margin-top:2px;'/>
+                    <input type="date" id="purchase_date" bind:value={food.purchase_date} class="w-full p-2" style='border-radius: 8px; margin-top:2px; font-size: 0.875rem;'/>
                 </div>
             </div>
             <div class="flex justify-end p-2">

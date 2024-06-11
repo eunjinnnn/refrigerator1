@@ -28,10 +28,7 @@ const config = {
       fontFamily: {
         PoetsenOne: ['PoetsenOne', 'sans-serif'],
         opensans: ['Open Sans', 'sans-serif'],
-      },
-      fontFamily: {
-        PoetsenOne: ['PoetsenOne', 'sans-serif'],
-        opensans: ['Open Sans', 'sans-serif'],
+        grandstander: ['Grandstander', 'sans-serif'],
       },
       screens: {
         'sm': {'min': '640px', 'max': '767px'},
