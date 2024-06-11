@@ -158,6 +158,13 @@
         editSelectedFood = '';
     }
 
+    function scrollToCategory(categoryId) {
+        const categoryElement = categoryRefs.get(categoryId);
+        if (categoryElement) {
+        categoryElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
 
 
 
@@ -169,13 +176,19 @@
 {:else if error}
     <b>Error: {error.message}</b>
 {:else}
-
+    <!-- <div class="flex justify-center mb-4">
+        {#each categories as category}
+            <button on:click={() => scrollToCategory(category.id)} class="flex shadow-md text-xs mx-1 px-4 whitespace-nowrap bg-zinc-50/70 border-[1px] border-zinc-200 rounded-xl ">
+                {category.name}
+            </button>
+        {/each}
+    </div> -->
     {#each categories as category}
         <div class='bg-zinc-50/70 flex flex-col mb-5 overflow-hidden border rounded-xl shadow-md'>
             <div class="flex justify-center items-center px-4 py-4">
                 <div class='flex items-center'>
                     <img src={category.img_url} class="h-6 sm:h-5" alt="ICON" />
-                    <p class="font-PoetsenOne text-xl md:text-lg sm: text-md font-bold text-amber-950 ml-2"> {category.name}</p>
+                    <p class="font-grandstander text-xl md:text-lg sm: text-md font-bold text-amber-950 ml-2 mt-2"> {category.name}</p>
                 </div>
             </div>
             <div class="mx-4 border-b border-lime-950 border-opacity-30"></div>

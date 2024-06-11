@@ -7,6 +7,12 @@ class CategorySchema(Schema):
     id: Optional[int]
     name: str
     img_url: str
+    isactive: bool
+
+class CategoryUpdateSchema(Schema):
+    name: Optional[str]
+    img_url: Optional[str]
+    is_active: Optional[bool]
 
 class FoodUnitSchema(Schema):
     id: Optional[int]

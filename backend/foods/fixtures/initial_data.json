@@ -25,7 +25,8 @@
         "pk": 1,
         "fields": {
             "name": "VEGETABLES",
-            "img_url": "images/frozen_food_icon.png"
+            "img_url": "images/vegetables_icon.png",
+            "isactive": true
         }
     },
     {
@@ -33,7 +34,8 @@
         "pk": 2,
         "fields": {
             "name": "DRINKS",
-            "img_url": "images/drinks_icon.png"
+            "img_url": "images/drinks_icon.png",
+            "isactive": true
         }
     },
     {
@@ -41,7 +43,8 @@
         "pk": 3,
         "fields": {
             "name": "FROZEN FOOD",
-            "img_url": "images/frozen_food_icon.png"
+            "img_url": "images/frozen_food_icon.png",
+            "isactive": true
         }
     },
     {
@@ -49,7 +52,8 @@
         "pk": 4,
         "fields": {
             "name": "ETC",
-            "img_url": "images/etc_icon.png"
+            "img_url": "images/etc_icon.png",
+            "isactive": true
         }
     },
     {

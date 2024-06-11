@@ -1,6 +1,6 @@
 from ninja import Router
 from .models import Category, FoodItem, FoodUnit
-from .schemas import CategorySchema, FoodItemSchema, FoodUnitSchema, VolumeUpdateSchema, FoodItemCreateSchema
+from .schemas import CategorySchema, FoodItemSchema, FoodUnitSchema, VolumeUpdateSchema, FoodItemCreateSchema, CategoryUpdateSchema
 from typing import List
 from django.shortcuts import get_object_or_404
 from ninja.errors import HttpError
@@ -55,6 +55,15 @@ def update_fooditem(request, fooditem_id: int, data: FoodItemSchema):
     fooditem.purchase_date = data.purchase_date
     fooditem.save()
     return fooditem
+
+@router.put("/categories/{category_id}", response=CategorySchema)
+def update_category(request, category_id: int, data: CategoryUpdateSchema):
+    category = get_object_or_404(Category, id=category_id)
+    for attr, value in data.dict().items():
+        if value is not None:
+            setattr(category, attr, value)
+    category.save()
+    return category
 
 # FoodItem 삭제
 @router.delete("/fooditems/{fooditem_id}", response={204: None})
