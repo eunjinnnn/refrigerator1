@@ -2,7 +2,7 @@
   import { page } from '$app/stores';
   import { Navbar, NavBrand, NavLi, NavUl, NavHamburger } from 'flowbite-svelte';
   $: activeUrl = $page.url.pathname;
-  let activeClass = 'text-white bg-green-700 md:bg-transparent md:text-green-700 md:dark:text-white dark:bg-green-600 md:dark:bg-transparent';
+  let activeClass = 'text-white bg-zinc-200 md:bg-transparent md:text-green-700 md:dark:text-white dark:bg-green-600 md:dark:bg-transparent';
   let nonActiveClass = 'text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent';
 </script>
 
@@ -11,11 +11,11 @@
     <!-- <img src="/images/FRESHKEEP.png" class="h-8 sm:h-6 md:h-4 lg:h-3 xl:h-2 mt-2 max-w-full" alt="FreshKeep Logo" /> -->
     <h1 class="text-3xl sm:text-xl font-grandstander font-semibold text-amber-950 mt-2">FRESHKEEP</h1>
   </NavBrand>
-  <NavHamburger />
-  <NavUl {activeUrl} {activeClass} {nonActiveClass} class="flex items-center space-x-4">
-    <NavLi href="/my_refrigerator" class="font-PoetsenOne text-lime-950 hover:text-orange-50 transition-colors duration-300">MY REFRIGERATOR</NavLi>
-    <NavLi href="/food_diary" class="font-PoetsenOne text-lime-950 hover:text-orange-50 transition-colors duration-300">FOOD DIARY</NavLi>
-    <NavLi href="/receipe" class="font-PoetsenOne text-lime-950 hover:text-orange-50 transition-colors duration-300">RECEIPE</NavLi>
+  <NavHamburger/>
+  <NavUl {activeUrl} {activeClass} {nonActiveClass} class="items-center w-full bg-zinc-50/70">
+    <NavLi href="/my_refrigerator" class="font-grandstander text-amber-950 hover:bg-zinc-200 transition-colors duration-300">MY REFRIGERATOR</NavLi>
+    <NavLi href="/food_diary" class="font-grandstander text-amber-950 hover:bg-zinc-200 transition-colors duration-300">FOOD DIARY</NavLi>
+    <NavLi href="/receipe" class="font-grandstander text-amber-950 hover:bg-zinc-200 transition-colors duration-300">RECEIPE</NavLi>
   </NavUl>
 </Navbar>
 

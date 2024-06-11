@@ -181,7 +181,7 @@
             <div class="mx-4 border-b border-lime-950 border-opacity-30"></div>
             <div class="flex flex-wrap mx-4 my-2">
                 {#each foodItems.filter(food => food.category_id === category.id) as food}
-                    <div class="w-1/3 p-1 hover:bg-stone-200 rounded-lg">
+                    <div class="w-1/3 p-1 hover:bg-zinc-200 rounded-lg">
                         <button on:click={() => showFoodDetails(food)} class="relative border-1 border-opacity-30 border-lime-950 rounded-lg h-full w-full flex items-center justify-center p-2 focus:outline-none h-full">
                             <!-- <Card class="relative border-1 border-lime-950 rounded-lg h-full flex items-center justify-center"> -->
                                 <div class="flex flex-col justify-center items-center text-center sm: p-1">
@@ -196,7 +196,7 @@
                         </button>
                     </div>
                 {/each}
-                <div class="w-1/3 p-1 hover:bg-stone-200 rounded-lg">
+                <div class="w-1/3 p-1 hover:bg-zinc-200 rounded-lg">
                     <button on:click={toggleFormVisibility} class="cursor-pointer w-full relative bg-white border-1 border-lime-950 rounded-lg focus:outline-none h-full  " style="background-color: transparent;">
                         <!-- <Card class="relative border-1 border-lime-950 rounded-lg h-full flex items-center justify-center"> -->
                             <div class="flex flex-col justify-center items-center text-center p-2 sm:p-1">
