@@ -2,6 +2,7 @@
     import { onMount } from 'svelte';
     import { fetchData } from "$lib/fetchData.js";
     import { Toggle } from 'flowbite-svelte';
+    import LoadingPage from '../loading.svelte';
 
     let categories = [];
     let isLoading = true;
@@ -21,7 +22,7 @@
 
     async function updateCategoryStatus(category, isActive) {
         try {
-            const updatedCategory = { ...category, isactive: isActive };
+            const updatedCategory = { ...categoryr, isactive: isActive };
             console.log(updatedCategory)
             const response = await fetchData(`foods/categories/${category.id}`, 'PUT', updatedCategory);
             category.isactive = response.isactive;
@@ -32,7 +33,7 @@
 </script>
 
 {#if isLoading}
-    <b>Loading...</b>
+    <LoadingPage/>
 {:else if error}
     <b>Error: {error.message}</b>
 {:else}
@@ -47,12 +48,12 @@
         <div class='flex items-center my-2'>
             <Toggle 
                 checked={category.isactive} 
-                class='scale-75 mr-4 ml-[calc(30%)]'
+                class='scale-75 mr-4 ml-[calc(20%)]'
                 on:change={(e) => updateCategoryStatus(category, e.target.checked)}
             />
             <div class='flex items-center'>
                 <img src={category.img_url} class="h-6 sm:h-5" alt="ICON" />
-                <p class="font-grandstander text-xl md:text-lg sm:text-md {category.isactive ? 'text-amber-950' : 'text-zinc-400'} ml-2 mt-2"> {category.name}</p>
+                <p class="font-grandstander text-md md:text-lg sm:text-md {category.isactive ? 'text-amber-950' : 'text-zinc-400'} ml-2 mt-2"> {category.name}</p>
             </div>
         </div>
     {/each}
