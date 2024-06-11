@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
     import { onMount } from 'svelte';
     import { fetchData } from '$lib/fetchData.js';
     import { Card, Button } from 'flowbite-svelte';
@@ -214,4 +214,4 @@
     body {
         overflow-x: hidden;
     }
-</style>
+</style> -->

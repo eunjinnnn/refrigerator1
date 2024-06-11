@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
     import { Button, Select, Input } from 'flowbite-svelte';
 
     let item_list = [
@@ -63,7 +63,7 @@
 <div class = 'flex'>
     <Button on:click={addForm} class="bg-lime-950 text-white mt-2 mr-2">ADD FOOD DIARY</Button>
     <Button on:click={addForm} class="bg-lime-950 text-white mt-2">OK</Button>
-</div>
+</div> -->
 
 
 
