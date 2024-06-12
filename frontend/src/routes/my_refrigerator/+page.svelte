@@ -22,7 +22,7 @@
 
     async function updateCategoryStatus(category, isActive) {
         try {
-            const updatedCategory = { ...categoryr, isactive: isActive };
+            const updatedCategory = { ...category, isactive: isActive };
             console.log(updatedCategory)
             const response = await fetchData(`foods/categories/${category.id}`, 'PUT', updatedCategory);
             category.isactive = response.isactive;
