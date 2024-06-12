@@ -66,13 +66,21 @@
     // ADD FOOD 관련 함수 
     // 유통기한 지난 날짜 빨간색으로 표시
     function isExpired(expiration_date) {
-        return new Date(expiration_date) < new Date();
+        const today = new Date();
+        const expirationDate = new Date(expiration_date);
+        const diffTime = expirationDate - today;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        console.log('diffDays:', diffDays);
+        if (diffDays < 0) {
+            return 'text-red-500';
+        } else if (diffDays <= 4) {
+            return 'text-blue-500';
+        } else {
+            return 'text-black';
+        }
     }
 
-    // function isAboutToExpired(expiration_date) {
-    //     return new Date(expiration_date) < new Date() - ;
-    // }
-
+ 
     // 버튼 누르면 ADD FORM MODAL 띄우기
     function toggleFormVisibility() {
         isFormVisible = !isFormVisible;
@@ -180,29 +188,9 @@
 
 {#if isLoading}
     <LoadingPage/>
-    <!-- <div class="loading-container">
-        <div class="loading-text">
-            <span>F</span>
-            <span>R</span>
-            <span>E</span>
-            <span>S</span>
-            <span>H</span>
-            <span>K</span>
-            <span>E</span>
-            <span>E</span>
-            <span>P</span>
-        </div>
-    </div> -->
 {:else if error}
     <b>Error: {error.message}</b>
 {:else}
-    <!-- <div class="flex justify-center mb-4">
-        {#each categories as category}
-            <button on:click={() => scrollToCategory(category.id)} class="flex shadow-md text-xs mx-1 px-4 whitespace-nowrap bg-zinc-50/70 border-[1px] border-zinc-200 rounded-xl ">
-                {category.name}
-            </button>
-        {/each}
-    </div> -->
     {#each activeCategories  as category}
         <div class='bg-zinc-50/70 flex flex-col mb-5 overflow-hidden border rounded-xl shadow-md'>
             <div class="flex justify-center items-center px-4 py-4">
@@ -221,7 +209,7 @@
                                     <p class="font-PoetsenOne text-lime-950 font-semibold text-lg sm: text-xs sm: text-pretty">
                                         {food.foodname} <span class="whitespace-nowrap ">{food.volume}{getUnitName(food.unit_id)}</span>
                                     </p>
-                                    <p class="{isExpired(food.expiration_date) ? 'text-red-500' : 'text-lime-950'} text-xs font-PoetsenOne whitespace-nowrap sm:text-xxs">
+                                    <p class="{isExpired(food.expiration_date)} text-xs font-PoetsenOne whitespace-nowrap sm:text-xxs">
                                         {food.expiration_date}
                                     </p>
                                 </div>
@@ -256,15 +244,7 @@
     <ModalEdit food={editSelectedFood} close={closeEditForm} {editFood} {categories} {units}/>
 {/if}
 
-<!-- svelte-ignore empty-block -->
-<!-- {#if isAddVisible}
-    <div> hi </div>
-{:else}
-    <Button type="button" on:click={addListVisibility} class="flex text-xxs bg-lime-950 text-orange-50 hover:text-lime-950 hover:bg-lime-800" size='sm'>TODAY'S COOKING</Button>
-{/if} -->
 
-
-<!-- modal -->
 <div class="modal {isFormVisible ? 'active' : ''}">
     <div class="modal-content relative " style="background-color: #FFFBF6;">
         <div class="flex justify-between items-center mb-2">
@@ -346,66 +326,5 @@
     body {
     overflow-x: hidden; /* Prevent horizontal scroll */
     }
-    /* .loading-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: rgba(255, 255, 255, 0.8);
-        z-index: 1000;
-    }
-    .loading-text {
-        font-size: 2rem;
-        font-family: 'Grandstander', cursive;
-        color: #ff4500;
-        display: flex;
-    }
-    .loading-text span {
-        opacity: 0;
-        animation: fadeInOut 1s infinite;
-        animation-fill-mode: both;
-    }
-    .loading-text span:nth-child(1) {
-        animation-delay: 0s;
-    }
-    .loading-text span:nth-child(2) {
-        animation-delay: 0.1s;
-    }
-    .loading-text span:nth-child(3) {
-        animation-delay: 0.2s;
-    }
-    .loading-text span:nth-child(4) {
-        animation-delay: 0.3s;
-    }
-    .loading-text span:nth-child(5) {
-        animation-delay: 0.4s;
-    }
-    .loading-text span:nth-child(6) {
-        animation-delay: 0.5s;
-    }
-    .loading-text span:nth-child(7) {
-        animation-delay: 0.6s;
-    }
-    .loading-text span:nth-child(8) {
-        animation-delay: 0.7s;
-    }
-    .loading-text span:nth-child(9) {
-        animation-delay: 0.8s;
-    }
-    @keyframes fadeInOut {
-        0% {
-            opacity: 0;
-        }
-        50% {
-            opacity: 1;
-        }
-        100% {
-            opacity: 0;
-        }
-    } */
 
 </style>

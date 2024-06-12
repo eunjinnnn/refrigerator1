@@ -31,7 +31,7 @@
     <NavUl {activeUrl} {activeClass} {nonActiveClass} class="items-center w-full bg-zinc-50/70" hidden={isMenuOpen? false : true}>
       <NavLi href="/my_refrigerator" class="font-grandstander text-amber-950 hover:bg-zinc-200 transition-colors duration-300" on:click={closeMenu}>MY REFRIGERATOR</NavLi>
       <NavLi href="/food_diary" class="font-grandstander text-amber-950 hover:bg-zinc-200 transition-colors duration-300" on:click={closeMenu}>FOOD DIARY</NavLi>
-      <NavLi href="/recipe" class="font-grandstander text-amber-950 hover:bg-zinc-200 transition-colors duration-300" on:click={closeMenu}>RECEIPE</NavLi>
+      <NavLi href="/receipe" class="font-grandstander text-amber-950 hover:bg-zinc-200 transition-colors duration-300" on:click={closeMenu}>RECEIPE</NavLi>
     </NavUl>
 </Navbar>
 
