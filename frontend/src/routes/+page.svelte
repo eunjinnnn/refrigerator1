@@ -256,7 +256,7 @@
             <div class='flex flex-wrap -mx-2 p-2'>
                 <label for="category" class="flex font-grandstander" style='font-size: 0.875rem;'>Category</label>
                 <select id="category" bind:value={cat_selected} class="flex w-full p-2 border mt-1" style='border-radius: 8px; '>
-                    {#each categories as category}
+                    {#each activeCategories as category}
                         <option value={category.id}>{category.name}</option>
                     {/each}
                 </select>
