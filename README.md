@@ -56,13 +56,13 @@
 
 ### BACKEND
 - DB소개(MODEL 소개)
-  - **Category (카테고리)   **
+  - **Category (카테고리)   **   
       name: 카테고리 이름 (예: VEGETABLES, DRINKS)   
       img_url: 카테고리 아이콘의 URL   
       isactive: 카테고리 활성화 상태 (기본값: True)
-  - **FoodUnit (식품 단위)  ** 
+  - **FoodUnit (식품 단위)  **    
       name: 단위 이름 (예: 개, 조각, L)
-  - **FoodItem (식품 항목) **   
+  - **FoodItem (식품 항목) **      
       category: 카테고리 (외래 키)   
       foodname: 식품 이름   
       volume: 식품의 양   
